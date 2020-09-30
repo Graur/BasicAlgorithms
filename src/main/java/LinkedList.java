@@ -1,16 +1,16 @@
-package main.java;
-
 import java.util.*;
 
 public class LinkedList
 {
     public Node head;
     public Node tail;
+    private int size;
 
     public LinkedList()
     {
         head = null;
         tail = null;
+        size = 0;
     }
 
     public void addInTail(Node item) {
@@ -19,6 +19,7 @@ public class LinkedList
         else
             this.tail.next = item;
         this.tail = item;
+        size++;
     }
 
     public Node find(int value) {
@@ -33,39 +34,131 @@ public class LinkedList
 
     public ArrayList<Node> findAll(int _value) {
         ArrayList<Node> nodes = new ArrayList<Node>();
-        // здесь будет ваш код поиска всех узлов
+        Node node = this.head;
+        while (node != null) {
+            if (node.value == _value)
+                nodes.add(node);
+            node = node.next;
+        }
+
         return nodes;
     }
 
     public boolean remove(int _value)
     {
-        // здесь будет ваш код удаления одного узла по заданному значению
-        return true; // если узел был удалён
+        Node node = find(_value);
+        if (node != null) {
+            Node prevNode = getPrevious(node);
+            unlinkNode(prevNode, node);
+            size--;
+            return true;
+        }
+        return false;
+    }
+
+    private Node getPrevious(Node _node) {
+        Node node = head;
+
+        if (node == _node) {
+            return null;
+        }
+
+        while (node != null) {
+            if (node.next == _node) {
+                return node;
+            }
+            node = node.next;
+        }
+        return null;
+    }
+
+    private void unlinkNode(Node _prevNode, Node _removableNode) {
+        if (_prevNode == null) {
+            head = _removableNode.next;
+        } else {
+            _prevNode.next = _removableNode.next;
+        }
     }
 
     public void removeAll(int _value)
     {
-        // здесь будет ваш код удаления всех узлов по заданному значению
+        Node node = this.head;
+        Node prevNode = null;
+        while (node != null) {
+            if (node.value == _value) {
+                unlinkNode(prevNode, node);
+                size--;
+            }
+            prevNode = node;
+            node = node.next;
+        }
     }
 
     public void clear()
     {
-        // здесь будет ваш код очистки всего списка
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
     }
 
     public int count()
     {
-        return 0; // здесь будет ваш код подсчёта количества элементов в списке
+        return size;
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        // здесь будет ваш код вставки узла после заданного
-
-        // если _nodeAfter = null ,
-        // добавьте новый элемент первым в списке
+        if (_nodeAfter == null) {
+            this.head = _nodeToInsert;
+            size++;
+        } else {
+            Node node = find(_nodeAfter.value);
+            if (node != null) {
+                _nodeToInsert.next = node.next;
+                node.next = _nodeToInsert;
+                size++;
+            }
+        }
     }
 
+    public ListIteratorI listIterator() {
+        return new ListIteratorI();
+    }
+
+    public class ListIteratorI implements Iterator<Integer> {
+        private int nextIndex;
+        private Node next;
+        private Node returned;
+
+        ListIteratorI() {
+            returned = null;
+            next = null;
+            nextIndex = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return nextIndex < size;
+        }
+
+        @Override
+        public Integer next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            } else if (returned == null) {
+                returned = head;
+                next = head.next;
+                nextIndex++;
+                return returned.value;
+            }
+
+            returned = next;
+            next = next.next;
+            nextIndex++;
+
+            return returned.value;
+        }
+    }
 }
 
 class Node
@@ -76,5 +169,26 @@ class Node
     {
         value = _value;
         next = null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return value == node.value &&
+                Objects.equals(next, node.next);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, next);
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "value=" + value +
+                '}';
     }
 }
