@@ -5,9 +5,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 @RunWith(JUnit4.class)
 public class LinkedListTest extends TestCase {
+
+    private static final int TEST_ITERATE_NUMBER = 100;
 
     private LinkedList largeList;
 
@@ -18,18 +21,16 @@ public class LinkedListTest extends TestCase {
     @Before
     public void setUpLargeList() {
         largeList = new LinkedList();
-        largeList.addInTail(new Node(1));
-        largeList.addInTail(new Node(3));
-        largeList.addInTail(new Node(7));
-        largeList.addInTail(new Node(9));
-        largeList.addInTail(new Node(6));
-        largeList.addInTail(new Node(1));
+
+        for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
+            largeList.addInTail(new Node(new Random().nextInt()));
+        }
     }
 
     @Before
     public void setUpOneElementList() {
         oneElementList = new LinkedList();
-        oneElementList.addInTail(new Node(111));
+        oneElementList.addInTail(new Node(1111111));
     }
     @Before
     public void setUpEmptyList() {
