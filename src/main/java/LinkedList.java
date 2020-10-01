@@ -73,10 +73,16 @@ public class LinkedList
     }
 
     private void unlinkNode(Node _prevNode, Node _removableNode) {
+        Node next = _removableNode.next;
+
         if (_prevNode == null) {
-            head = _removableNode.next;
+            head = next;
         } else {
-            _prevNode.next = _removableNode.next;
+            _prevNode.next = next;
+        }
+
+        if (next == null) {
+            tail = _prevNode;
         }
     }
 
@@ -88,8 +94,9 @@ public class LinkedList
             if (node.value == _value) {
                 unlinkNode(prevNode, node);
                 size--;
+            } else {
+                prevNode = node;
             }
-            prevNode = node;
             node = node.next;
         }
     }

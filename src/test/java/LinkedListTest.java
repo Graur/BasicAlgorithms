@@ -22,9 +22,16 @@ public class LinkedListTest extends TestCase {
     public void setUpLargeList() {
         largeList = new LinkedList();
 
-        for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
-            largeList.addInTail(new Node(new Random().nextInt()));
-        }
+//        for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
+//            largeList.addInTail(new Node(new Random().nextInt()));
+//        }
+        largeList = new LinkedList();
+        largeList.addInTail(new Node(1));
+        largeList.addInTail(new Node(3));
+        largeList.addInTail(new Node(7));
+        largeList.addInTail(new Node(9));
+        largeList.addInTail(new Node(1));
+        largeList.addInTail(new Node(1));
     }
 
     @Before
@@ -38,8 +45,11 @@ public class LinkedListTest extends TestCase {
     }
 
     public void setUpAllMockLists() {
+        System.out.println("****************EMPTY LIST******************************");
         setUpEmptyList();
+        System.out.println("****************LARGE LIST******************************");
         setUpLargeList();
+        System.out.println("****************ONE ELEM LIST******************************");
         setUpOneElementList();
     }
 
@@ -143,6 +153,11 @@ public class LinkedListTest extends TestCase {
     }
 
     @Test
+    public void testRemoveAllFromTail() {
+
+    }
+
+    @Test
     public void testClear() {
         setUpAllMockLists();
         System.out.println();
@@ -203,8 +218,11 @@ public class LinkedListTest extends TestCase {
     }
 
     public void viewAllListsInTerminal() {
+        System.out.println("****************EMPTY LIST******************************");
         viewListOnTerminal(emptyList);
+        System.out.println("****************LARGE LIST******************************");
         viewListOnTerminal(largeList);
+        System.out.println("****************ONE ELEM LIST******************************");
         viewListOnTerminal(oneElementList);
     }
 
