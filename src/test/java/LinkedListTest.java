@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
@@ -151,11 +152,11 @@ public class LinkedListTest extends TestCase {
         tailElemTestInMultiplyList.remove(testedValue);
         assertEquals("Multiply list with single elem. Remove from tail: head", 1, tailElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove from tail: tail", 3, tailElemTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with single elem. Remove from tail: count", 3, startElemTestInMultiplyList.count());
+        assertEquals("Multiply list with single elem. Remove from tail: count", 3, tailElemTestInMultiplyList.count());
 
         startSeveralElemsTestInMultiplyList.remove(testedValue);
-        assertEquals("Multiply list with several elem. Remove from tail: head", 1, startSeveralElemsTestInMultiplyList.head.value);
-        assertEquals("Multiply list with several elem. Remove from tail: tail", 99999, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove from tail: head", 99999, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove from tail: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
         assertEquals("Multiply list with several elem. Remove from tail: count", 3, startSeveralElemsTestInMultiplyList.count());
     }
 
@@ -181,12 +182,12 @@ public class LinkedListTest extends TestCase {
         middleElemTestInMultiplyList.remove(testedValue);
         assertEquals("Multiply list with single elem. Remove from middle: head", 1, middleElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove from middle: tail", 4, middleElemTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with single elem. Remove from middle: count", 3, startElemTestInMultiplyList.count());
+        assertEquals("Multiply list with single elem. Remove from middle: count", 3, middleElemTestInMultiplyList.count());
 
         middleSeveralElemsTestInMultiplyList.remove(testedValue);
         assertEquals("Multiply list with several elem. Remove from middle: head", 1, middleSeveralElemsTestInMultiplyList.head.value);
         assertEquals("Multiply list with several elem. Remove from middle: tail", 4, middleSeveralElemsTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with several elem. Remove from middle: count", 3, startSeveralElemsTestInMultiplyList.count());
+        assertEquals("Multiply list with several elem. Remove from middle: count", 3, middleSeveralElemsTestInMultiplyList.count());
     }
 
     /**
@@ -244,11 +245,11 @@ public class LinkedListTest extends TestCase {
         tailElemTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with single elem. Remove All from tail: head", 1, tailElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove All from tail: tail", 3, tailElemTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with single elem. Remove All from tail: count", 3, startElemTestInMultiplyList.count());
+        assertEquals("Multiply list with single elem. Remove All from tail: count", 3, tailElemTestInMultiplyList.count());
 
         startSeveralElemsTestInMultiplyList.removeAll(testedValue);
-        assertEquals("Multiply list with several elem. Remove All from tail: head", 1, startSeveralElemsTestInMultiplyList.head.value);
-        assertEquals("Multiply list with several elem. Remove All from tail: tail", 2, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from tail: head", 3, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from tail: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
         assertEquals("Multiply list with several elem. Remove All from tail: count", 2, startSeveralElemsTestInMultiplyList.count());
     }
 
@@ -274,11 +275,165 @@ public class LinkedListTest extends TestCase {
         middleElemTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with single elem. Remove All from middle: head", 1, middleElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove All from middle: tail", 4, middleElemTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with single elem. Remove All from middle: count", 3, startElemTestInMultiplyList.count());
+        assertEquals("Multiply list with single elem. Remove All from middle: count", 3, middleElemTestInMultiplyList.count());
 
         middleSeveralElemsTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with several elem. Remove All from middle: head", 1, middleSeveralElemsTestInMultiplyList.head.value);
         assertEquals("Multiply list with several elem. Remove All from middle: tail", 4, middleSeveralElemsTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with several elem. Remove All from middle: count", 2, startSeveralElemsTestInMultiplyList.count());
+        assertEquals("Multiply list with several elem. Remove All from middle: count", 2, middleSeveralElemsTestInMultiplyList.count());
+    }
+
+    @Test
+    public void testClear() {
+        setUpLists();
+
+        startElemTestInMultiplyList.clear();
+        startSeveralElemsTestInMultiplyList.clear();
+        middleElemTestInMultiplyList.clear();
+        middleSeveralElemsTestInMultiplyList.clear();
+        tailElemTestInMultiplyList.clear();
+        tailSeveralElemsTestInMultiplyList.clear();
+        oneElemListWithTestValue.clear();
+        oneElemListWithoutTestValue.clear();
+        emptyList.clear();
+
+        assertNull(startElemTestInMultiplyList.head);
+        assertNull(startElemTestInMultiplyList.tail);
+        assertEquals(0, startElemTestInMultiplyList.count());
+
+        assertNull(startSeveralElemsTestInMultiplyList.head);
+        assertNull(startSeveralElemsTestInMultiplyList.tail);
+        assertEquals(0, startSeveralElemsTestInMultiplyList.count());
+
+        assertNull(middleElemTestInMultiplyList.head);
+        assertNull(middleElemTestInMultiplyList.tail);
+        assertEquals(0, middleElemTestInMultiplyList.count());
+
+        assertNull(middleSeveralElemsTestInMultiplyList.head);
+        assertNull(middleSeveralElemsTestInMultiplyList.tail);
+        assertEquals(0, middleSeveralElemsTestInMultiplyList.count());
+
+        assertNull(tailElemTestInMultiplyList.head);
+        assertNull(tailElemTestInMultiplyList.tail);
+        assertEquals(0, tailElemTestInMultiplyList.count());
+
+        assertNull(tailSeveralElemsTestInMultiplyList.head);
+        assertNull(tailSeveralElemsTestInMultiplyList.tail);
+        assertEquals(0, tailSeveralElemsTestInMultiplyList.count());
+
+        assertNull(oneElemListWithTestValue.head);
+        assertNull(oneElemListWithTestValue.tail);
+        assertEquals(0, oneElemListWithTestValue.count());
+
+        assertNull(oneElemListWithoutTestValue.head);
+        assertNull(oneElemListWithoutTestValue.tail);
+        assertEquals(0, oneElemListWithoutTestValue.count());
+
+        assertNull(emptyList.head);
+        assertNull(emptyList.tail);
+        assertEquals(0, emptyList.count());
+    }
+
+    @Test
+    public void testFindAll() {
+        setUpLists();
+        ArrayList<Node> expectedArrayListWithOneResult = new ArrayList<>();
+        ArrayList<Node> expectedArrayListWithSeveralResult = new ArrayList<>();
+        expectedArrayListWithOneResult.add(new Node(testedValue));
+        expectedArrayListWithSeveralResult.add(new Node(testedValue));
+        expectedArrayListWithSeveralResult.add(new Node(testedValue));
+
+        ArrayList<Node> actualStartMultiply = startElemTestInMultiplyList.findAll(testedValue);
+        expectedArrayListWithOneResult.forEach(expected -> {
+            assertEquals(expected.value, actualStartMultiply.get(0).value);
+        });
+
+        ArrayList<Node> actualStartSeveralMultiply = startSeveralElemsTestInMultiplyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
+            assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualStartSeveralMultiply.get(i).value);
+        }
+
+        ArrayList<Node> actualMiddleMultiply = middleElemTestInMultiplyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
+            assertEquals(expectedArrayListWithOneResult.get(i).value, actualMiddleMultiply.get(i).value);
+        }
+
+        ArrayList<Node> actualMiddleSeveralMultiply = middleSeveralElemsTestInMultiplyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
+            assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualMiddleSeveralMultiply.get(i).value);
+        }
+
+        ArrayList<Node> actualTailMultiply = tailElemTestInMultiplyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
+            assertEquals(expectedArrayListWithOneResult.get(i).value, actualTailMultiply.get(i).value);
+        }
+
+        ArrayList<Node> actualTailSeveralMultiply = tailSeveralElemsTestInMultiplyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
+            assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualTailSeveralMultiply.get(i).value);
+        }
+
+        ArrayList<Node> actualOneElemWithValue = oneElemListWithTestValue.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
+            assertEquals(expectedArrayListWithOneResult.get(i).value, actualOneElemWithValue.get(i).value);
+        }
+
+        ArrayList<Node> actualOneElemWithoutValue = oneElemListWithoutTestValue.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
+            assertEquals(new ArrayList<>(), actualOneElemWithoutValue);
+        }
+
+        ArrayList<Node> emptyListValue = emptyList.findAll(testedValue);
+        for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
+            assertEquals(new ArrayList<>(), emptyListValue);
+        }
+    }
+
+    @Test
+    public void testCount() {
+        setUpLists();
+
+        assertEquals(0, emptyList.count());
+        assertEquals(1, oneElemListWithTestValue.count());
+        assertEquals(4, tailSeveralElemsTestInMultiplyList.count());
+    }
+
+    @Test
+    public void testInsertAfter() {
+        setUpLists();
+
+        tailElemTestInMultiplyList.insertAfter(null, testedNode);
+        assertEquals(testedValue, tailElemTestInMultiplyList.head.value);
+        assertEquals(1, tailElemTestInMultiplyList.head.next.value);
+        assertEquals(testedValue, tailElemTestInMultiplyList.tail.value);
+        assertEquals(5, tailElemTestInMultiplyList.count());
+
+        setUpLists();
+
+        tailElemTestInMultiplyList.insertAfter(new Node(1), testedNode);
+        assertEquals(1, tailElemTestInMultiplyList.head.value);
+        assertEquals(testedValue, tailElemTestInMultiplyList.head.next.value);
+        assertEquals(2, tailElemTestInMultiplyList.head.next.next.value);
+        assertEquals(5, tailElemTestInMultiplyList.count());
+
+        startElemTestInMultiplyList.insertAfter(new Node(4), testedNode);
+        assertEquals(testedValue, startElemTestInMultiplyList.head.value);
+        assertEquals(testedValue, startElemTestInMultiplyList.tail.value);
+        assertNull(startElemTestInMultiplyList.tail.next);
+        assertEquals(4, startElemTestInMultiplyList.head.next.next.next.value);
+        assertEquals(5, startElemTestInMultiplyList.count());
+
+        oneElemListWithoutTestValue.insertAfter(new Node(1), testedNode);
+        assertEquals(1, oneElemListWithoutTestValue.head.value);
+        assertEquals(testedValue, oneElemListWithoutTestValue.head.next.value);
+        assertNull(oneElemListWithoutTestValue.tail.next);
+        assertEquals(testedValue, oneElemListWithoutTestValue.tail.value);
+        assertEquals(2, oneElemListWithoutTestValue.count());
+
+        emptyList.insertAfter(null, testedNode);
+        assertEquals(testedValue, emptyList.head.value);
+        assertEquals(testedValue, emptyList.tail.value);
+        assertNull(emptyList.tail.next);
+        assertEquals(1, emptyList.count());
     }
 }
