@@ -4,238 +4,281 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
 public class LinkedListTest extends TestCase {
 
-    private static final int TEST_ITERATE_NUMBER = 100;
+    private static final int TEST_ITERATE_NUMBER = 10000;
 
     private LinkedList largeList;
 
-    private LinkedList oneElementList;
+    private LinkedList startElemTestInMultiplyList;
+
+    private LinkedList startSeveralElemsTestInMultiplyList;
+
+    private LinkedList middleElemTestInMultiplyList;
+
+    private LinkedList middleSeveralElemsTestInMultiplyList;
+
+    private LinkedList tailElemTestInMultiplyList;
+
+    private LinkedList tailSeveralElemsTestInMultiplyList;
+
+    private LinkedList oneElemListWithTestValue;
+
+    private LinkedList oneElemListWithoutTestValue;
 
     private LinkedList emptyList;
 
-    @Before
-    public void setUpLargeList() {
-        largeList = new LinkedList();
+    private int testedValue = 99999;
 
-//        for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
-//            largeList.addInTail(new Node(new Random().nextInt()));
-//        }
-        largeList = new LinkedList();
-        largeList.addInTail(new Node(1));
-        largeList.addInTail(new Node(3));
-        largeList.addInTail(new Node(7));
-        largeList.addInTail(new Node(9));
-        largeList.addInTail(new Node(1));
-        largeList.addInTail(new Node(1));
-    }
+    private Node testedNode = new Node(testedValue);
+
+    private LinkedList expectedList;
 
     @Before
-    public void setUpOneElementList() {
-        oneElementList = new LinkedList();
-        oneElementList.addInTail(new Node(1111111));
-    }
-    @Before
-    public void setUpEmptyList() {
+    public void setUpLists() {
+        largeList = new LinkedList();
+
+        for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
+            largeList.addInTail(new Node(new Random().nextInt()));
+        }
+
+        startElemTestInMultiplyList = new LinkedList();
+        startElemTestInMultiplyList.addInTail(new Node(99999));
+        startElemTestInMultiplyList.addInTail(new Node(2));
+        startElemTestInMultiplyList.addInTail(new Node(3));
+        startElemTestInMultiplyList.addInTail(new Node(4));
+
+        startSeveralElemsTestInMultiplyList = new LinkedList();
+        startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        startSeveralElemsTestInMultiplyList.addInTail(new Node(3));
+        startSeveralElemsTestInMultiplyList.addInTail(new Node(4));
+
+        middleElemTestInMultiplyList = new LinkedList();
+        middleElemTestInMultiplyList.addInTail(new Node(1));
+        middleElemTestInMultiplyList.addInTail(new Node(99999));
+        middleElemTestInMultiplyList.addInTail(new Node(3));
+        middleElemTestInMultiplyList.addInTail(new Node(4));
+
+        middleSeveralElemsTestInMultiplyList = new LinkedList();
+        middleSeveralElemsTestInMultiplyList.addInTail(new Node(1));
+        middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        middleSeveralElemsTestInMultiplyList.addInTail(new Node(4));
+
+        tailElemTestInMultiplyList = new LinkedList();
+        tailElemTestInMultiplyList.addInTail(new Node(1));
+        tailElemTestInMultiplyList.addInTail(new Node(2));
+        tailElemTestInMultiplyList.addInTail(new Node(3));
+        tailElemTestInMultiplyList.addInTail(new Node(99999));
+
+        tailSeveralElemsTestInMultiplyList = new LinkedList();
+        tailSeveralElemsTestInMultiplyList.addInTail(new Node(1));
+        tailSeveralElemsTestInMultiplyList.addInTail(new Node(2));
+        tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+
+        oneElemListWithTestValue = new LinkedList();
+        oneElemListWithTestValue.addInTail(new Node(99999));
+
+        oneElemListWithoutTestValue = new LinkedList();
+        oneElemListWithoutTestValue.addInTail(new Node(1));
+
         emptyList = new LinkedList();
+
+        expectedList = new LinkedList();
+        expectedList.addInTail(new Node(1));
+        expectedList.addInTail(new Node(2));
+        expectedList.addInTail(new Node(3));
+        expectedList.addInTail(new Node(4));
     }
 
-    public void setUpAllMockLists() {
-        System.out.println("****************EMPTY LIST******************************");
-        setUpEmptyList();
-        System.out.println("****************LARGE LIST******************************");
-        setUpLargeList();
-        System.out.println("****************ONE ELEM LIST******************************");
-        setUpOneElementList();
+    /**
+     remove
+     */
+    @Test
+    public void testRemoveFromStart() {
+        setUpLists();
+
+        emptyList.remove(testedValue);
+        assertNull("Empty list with elem. Remove from start: head", emptyList.head);
+        assertNull("Empty list with elem. Remove from start: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove from start: count", 0, emptyList.count());
+
+        oneElemListWithTestValue.remove(testedValue);
+        assertNull("Single list with elem. Remove from start: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove from start: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove from start: count", 0, oneElemListWithTestValue.count());
+
+        oneElemListWithoutTestValue.remove(testedValue);
+        assertEquals("Single list with elem. Remove from start: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove from start: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove from start: count", 1, oneElemListWithoutTestValue.count());
+
+        startElemTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with single elem. Remove from start: head", 2, startElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove from start: tail", 4, startElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove from start: count", 3, startElemTestInMultiplyList.count());
+
+        startSeveralElemsTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with several elem. Remove from start: head", 99999, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove from start: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove from start: count", 3, startSeveralElemsTestInMultiplyList.count());
     }
 
     @Test
-    public void testAddInTail() {
-        setUpAllMockLists();
-        int value = 3;
-        Node node = new Node(value);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to add in tail this element: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+    public void testRemoveFromTail() {
+        setUpLists();
 
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        emptyList.addInTail(node);
-        largeList.addInTail(node);
-        oneElementList.addInTail(node);
+        emptyList.remove(testedValue);
+        assertNull("Empty list with elem. Remove from tail: head", emptyList.head);
+        assertNull("Empty list with elem. Remove from tail: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove from tail: count", 0, emptyList.count());
 
-        System.out.println("Lists after: ");
-        viewAllListsInTerminal();
+        oneElemListWithTestValue.remove(testedValue);
+        assertNull("Single list with elem. Remove from tail: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove from tail: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove from tail: count", 0, oneElemListWithTestValue.count());
+
+        oneElemListWithoutTestValue.remove(testedValue);
+        assertEquals("Single list with elem. Remove from tail: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove from tail: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove from tail: count", 1, oneElemListWithoutTestValue.count());
+
+        tailElemTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with single elem. Remove from tail: head", 1, tailElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove from tail: tail", 3, tailElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove from tail: count", 3, startElemTestInMultiplyList.count());
+
+        startSeveralElemsTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with several elem. Remove from tail: head", 1, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove from tail: tail", 99999, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove from tail: count", 3, startSeveralElemsTestInMultiplyList.count());
     }
 
     @Test
-    public void testFind() {
-        setUpAllMockLists();
-        int value = 3;
-        Node node = new Node(value);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to find this element: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+    public void testRemoveFromMiddle() {
+        setUpLists();
 
-        System.out.println("+++++++++++++++++++++FINDING++++++++++++++++++++++++");
-        Node node1 = emptyList.find(value);
-        Node node2 = largeList.find(value);
-        Node node3 = oneElementList.find(value);
+        emptyList.remove(testedValue);
+        assertNull("Empty list with elem. Remove from middle: head", emptyList.head);
+        assertNull("Empty list with elem. Remove from middle: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove from middle: count", 0, emptyList.count());
 
-        System.out.println("Finding elements: " + node1 + " " +  node2 + " " +  node3);
+        oneElemListWithTestValue.remove(testedValue);
+        assertNull("Single list with elem. Remove from middle: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove from middle: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove from middle: count", 0, oneElemListWithTestValue.count());
+
+        oneElemListWithoutTestValue.remove(testedValue);
+        assertEquals("Single list with elem. Remove from middle: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove from middle: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove from middle: count", 1, oneElemListWithoutTestValue.count());
+
+        middleElemTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with single elem. Remove from middle: head", 1, middleElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove from middle: tail", 4, middleElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove from middle: count", 3, startElemTestInMultiplyList.count());
+
+        middleSeveralElemsTestInMultiplyList.remove(testedValue);
+        assertEquals("Multiply list with several elem. Remove from middle: head", 1, middleSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove from middle: tail", 4, middleSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove from middle: count", 3, startSeveralElemsTestInMultiplyList.count());
     }
 
+    /**
+        removeAll
+     */
     @Test
-    public void testFindAll() {
-        setUpAllMockLists();
-        int value = 1;
-        Node node = new Node(value);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to find ALL this elements: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+    public void testRemoveAllFromStart() {
+        setUpLists();
 
-        System.out.println("+++++++++++++++++++++FINDING ALL++++++++++++++++++++++++");
-        ArrayList<Node> nodes1 = emptyList.findAll(value);
-        ArrayList<Node> nodes2 = largeList.findAll(value);
-        ArrayList<Node> nodes3 = oneElementList.findAll(value);
+        emptyList.removeAll(testedValue);
+        assertNull("Empty list with elem. Remove All from start: head", emptyList.head);
+        assertNull("Empty list with elem. Remove All from start: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove All from start: count", 0, emptyList.count());
 
-        System.out.println("Finding elements: " + nodes1 + " " +  nodes2 + " " +  nodes3);
-    }
+        oneElemListWithTestValue.removeAll(testedValue);
+        assertNull("Single list with elem. Remove All from start: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove All from start: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove All from start: count", 0, oneElemListWithTestValue.count());
 
-    @Test
-    public void testRemove() {
-        setUpAllMockLists();
-        int value = 1;
-        Node node = new Node(value);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to delete first finding element: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+        oneElemListWithoutTestValue.removeAll(testedValue);
+        assertEquals("Single list with elem. Remove All from start: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove All from start: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove All from start: count", 1, oneElemListWithoutTestValue.count());
 
-        System.out.println("-------------------------------------------------------------------");
-        boolean isRemoved1 = emptyList.remove(value);
-        boolean isRemoved2 = largeList.remove(value);
-        boolean isRemoved3 = oneElementList.remove(value);
+        startElemTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with single elem. Remove All from start: head", 2, startElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove All from start: tail", 4, startElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove All from start: count", 3, startElemTestInMultiplyList.count());
 
-        System.out.println("Deleting statuses: " + isRemoved1 + " " +  isRemoved2 + " " +  isRemoved3);
-        System.out.println("Lists after: ");
-        viewAllListsInTerminal();
-    }
-
-    @Test
-    public void testRemoveAll() {
-        setUpAllMockLists();
-        int value = 1;
-        Node node = new Node(value);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to delete ALL finding elements: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
-
-        System.out.println("---------------------REMOVING ALL -------------------------------");
-        emptyList.removeAll(value);
-        largeList.removeAll(value);
-        oneElementList.removeAll(value);
-
-        System.out.println("List after: ");
-        viewAllListsInTerminal();
+        startSeveralElemsTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with several elem. Remove All from start: head", 3, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from start: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from start: count", 2, startSeveralElemsTestInMultiplyList.count());
     }
 
     @Test
     public void testRemoveAllFromTail() {
+        setUpLists();
 
+        emptyList.removeAll(testedValue);
+        assertNull("Empty list with elem. Remove All from tail: head", emptyList.head);
+        assertNull("Empty list with elem. Remove All from tail: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove All from tail: count", 0, emptyList.count());
+
+        oneElemListWithTestValue.removeAll(testedValue);
+        assertNull("Single list with elem. Remove All from tail: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove All from tail: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove All from tail: count", 0, oneElemListWithTestValue.count());
+
+        oneElemListWithoutTestValue.removeAll(testedValue);
+        assertEquals("Single list with elem. Remove All from tail: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove All from tail: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove All from tail: count", 1, oneElemListWithoutTestValue.count());
+
+        tailElemTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with single elem. Remove All from tail: head", 1, tailElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove All from tail: tail", 3, tailElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove All from tail: count", 3, startElemTestInMultiplyList.count());
+
+        startSeveralElemsTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with several elem. Remove All from tail: head", 1, startSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from tail: tail", 2, startSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from tail: count", 2, startSeveralElemsTestInMultiplyList.count());
     }
 
     @Test
-    public void testClear() {
-        setUpAllMockLists();
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to clear ALL elements========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+    public void testRemoveAllFromMiddle() {
+        setUpLists();
 
-        System.out.println("---------------------CLEARING ALL -------------------------------");
-        emptyList.clear();
-        largeList.clear();
-        oneElementList.clear();
+        emptyList.removeAll(testedValue);
+        assertNull("Empty list with elem. Remove All from middle: head", emptyList.head);
+        assertNull("Empty list with elem. Remove All from middle: tail", emptyList.tail);
+        assertEquals("Empty list with elem. Remove All from middle: count", 0, emptyList.count());
 
-        System.out.println("List after: ");
-        viewAllListsInTerminal();
-    }
+        oneElemListWithTestValue.removeAll(testedValue);
+        assertNull("Single list with elem. Remove All from middle: head", oneElemListWithTestValue.head);
+        assertNull("Single list with elem. Remove All from middle: tail", oneElemListWithTestValue.tail);
+        assertEquals("Single list with elem. Remove All from middle: count", 0, oneElemListWithTestValue.count());
 
-    @Test
-    public void testCount() {
-        setUpAllMockLists();
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to count ALL elements========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
-    }
+        oneElemListWithoutTestValue.removeAll(testedValue);
+        assertEquals("Single list with elem. Remove All from middle: head", 1, oneElemListWithoutTestValue.head.value);
+        assertEquals("Single list with elem. Remove All from middle: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertEquals("Single list with elem. Remove All from middle: count", 1, oneElemListWithoutTestValue.count());
 
-    @Test
-    public void testInsertAfter() {
-        setUpAllMockLists();
-        int value = 9999999;
-        Node node = new Node(value);
-        Node nodeAfter = new Node(1);
-        System.out.println();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.println("========Try to add after + " + nodeAfter.value + " this element: " + value + "========");
-        System.out.println("Lists before: ");
-        viewAllListsInTerminal();
+        middleElemTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with single elem. Remove All from middle: head", 1, middleElemTestInMultiplyList.head.value);
+        assertEquals("Multiply list with single elem. Remove All from middle: tail", 4, middleElemTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with single elem. Remove All from middle: count", 3, startElemTestInMultiplyList.count());
 
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        emptyList.insertAfter(nodeAfter, node);
-        largeList.insertAfter(nodeAfter, node);
-        oneElementList.insertAfter(nodeAfter, node);
-
-        System.out.println("Lists after: ");
-        viewAllListsInTerminal();
-    }
-
-    public void viewListOnTerminal(LinkedList list) {
-        System.out.println("======== Collection ========");
-        iterateList(list);
-        if (list == null) {
-            System.out.println("[]");
-        } else {
-            System.out.println("Size: " + list.count());
-        }
-        System.out.println("=====================================");
-    }
-
-    public void viewAllListsInTerminal() {
-        System.out.println("****************EMPTY LIST******************************");
-        viewListOnTerminal(emptyList);
-        System.out.println("****************LARGE LIST******************************");
-        viewListOnTerminal(largeList);
-        System.out.println("****************ONE ELEM LIST******************************");
-        viewListOnTerminal(oneElementList);
-    }
-
-    private static void iterateList(LinkedList list) {
-
-        if (list == null) {
-            System.out.println("[]");
-        } else {
-            LinkedList.ListIteratorI li = list.listIterator();
-            while (li.hasNext()) {
-                System.out.print(li.next() + " ");
-            }
-            System.out.println();
-        }
+        middleSeveralElemsTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with several elem. Remove All from middle: head", 1, middleSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: tail", 4, middleSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: count", 2, startSeveralElemsTestInMultiplyList.count());
     }
 }
