@@ -118,11 +118,15 @@ public class LinkedList2
         } else {
             Node node = find(_nodeAfter.value);
             if (node != null) {
-                if (node == tail) {
-                    this.tail = _nodeToInsert;
-                }
                 _nodeToInsert.next = node.next;
                 node.next = _nodeToInsert;
+                if (node == tail) {
+                    this.tail = _nodeToInsert;
+                    this.tail.prev = node;
+                } else {
+                    node.next.next.prev = _nodeToInsert;
+                    _nodeToInsert.prev = node;
+                }
                 size++;
             }
         }

@@ -459,6 +459,8 @@ public class LinkedList2Test extends TestCase {
         tailElemTestInMultiplyList.insertAfter(null, testedNode);
         assertEquals(testedValue, tailElemTestInMultiplyList.head.value);
         assertEquals(1, tailElemTestInMultiplyList.head.next.value);
+        assertNull(tailElemTestInMultiplyList.head.prev);
+        assertEquals(testedValue, tailElemTestInMultiplyList.tail.next.prev.value);
         assertEquals(testedValue, tailElemTestInMultiplyList.tail.value);
         assertEquals(5, tailElemTestInMultiplyList.count());
 
@@ -467,6 +469,8 @@ public class LinkedList2Test extends TestCase {
         tailElemTestInMultiplyList.insertAfter(new Node(1), testedNode);
         assertEquals(1, tailElemTestInMultiplyList.head.value);
         assertEquals(testedValue, tailElemTestInMultiplyList.head.next.value);
+        assertNull(tailElemTestInMultiplyList.head.prev);
+        assertEquals(testedValue, tailElemTestInMultiplyList.head.next.prev.value);
         assertEquals(2, tailElemTestInMultiplyList.head.next.next.value);
         assertEquals(5, tailElemTestInMultiplyList.count());
 
@@ -475,19 +479,23 @@ public class LinkedList2Test extends TestCase {
         assertEquals(testedValue, startElemTestInMultiplyList.tail.value);
         assertNull(startElemTestInMultiplyList.tail.next);
         assertEquals(4, startElemTestInMultiplyList.head.next.next.next.value);
+        assertEquals(4, startElemTestInMultiplyList.tail.prev.value);
         assertEquals(5, startElemTestInMultiplyList.count());
 
         oneElemListWithoutTestValue.insertAfter(new Node(1), testedNode);
         assertEquals(1, oneElemListWithoutTestValue.head.value);
         assertEquals(testedValue, oneElemListWithoutTestValue.head.next.value);
         assertNull(oneElemListWithoutTestValue.tail.next);
+        assertNull(oneElemListWithoutTestValue.head.prev);
         assertEquals(testedValue, oneElemListWithoutTestValue.tail.value);
+        assertEquals(1, oneElemListWithoutTestValue.tail.prev.value);
         assertEquals(2, oneElemListWithoutTestValue.count());
 
         emptyList.insertAfter(null, testedNode);
         assertEquals(testedValue, emptyList.head.value);
         assertEquals(testedValue, emptyList.tail.value);
         assertNull(emptyList.tail.next);
+        assertNull(emptyList.head.prev);
         assertEquals(1, emptyList.count());
     }
 }
