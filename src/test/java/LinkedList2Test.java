@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
@@ -95,6 +96,53 @@ public class LinkedList2Test extends TestCase {
         expectedList.addInTail(new Node(2));
         expectedList.addInTail(new Node(3));
         expectedList.addInTail(new Node(4));
+    }
+
+    /**
+     * find
+     */
+    @Test
+    public void testFind() {
+        setUpLists();
+
+        Node fromStartInMultiplyListActualNode = startElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromStartInMultiplyListActualNode.value);
+        assertNull(fromStartInMultiplyListActualNode.prev);
+        assertEquals(2, fromStartInMultiplyListActualNode.next.value);
+
+        Node fromStartInMultiplyListWithSeveralElemsActualNode = startSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualNode.value);
+        assertNull(fromStartInMultiplyListWithSeveralElemsActualNode.prev);
+        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualNode.next.value);
+
+        Node fromMiddleInMultiplyListActualNode = middleElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromMiddleInMultiplyListActualNode.value);
+        assertEquals(1, fromMiddleInMultiplyListActualNode.prev.value);
+        assertEquals(3, fromMiddleInMultiplyListActualNode.next.value);
+
+        Node fromMiddleInMultiplyListWithSeveralElemsActualNode = middleSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualNode.value);
+        assertEquals(1, fromMiddleInMultiplyListWithSeveralElemsActualNode.prev.value);
+        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualNode.next.value);
+
+        Node fromTailInMultiplyListWithActualNode = tailElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromTailInMultiplyListWithActualNode.value);
+        assertEquals(3, fromTailInMultiplyListWithActualNode.prev.value);
+        assertNull(fromTailInMultiplyListWithActualNode.next);
+
+        Node fromTailInMultiplyListWithSeveralElemsActualNode = tailSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualNode.value);
+        assertEquals(2, fromTailInMultiplyListWithSeveralElemsActualNode.prev.value);
+        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualNode.next.value);
+
+        Node oneElemListWithValueActualNode = oneElemListWithTestValue.find(testedValue);
+        assertEquals(testedValue, oneElemListWithValueActualNode.value);
+
+        Node oneElemListWithoutValueActualNode = oneElemListWithoutTestValue.find(testedValue);
+        assertNull(oneElemListWithoutValueActualNode);
+
+        Node emptyListActualNode = emptyList.find(testedValue);
+        assertNull(emptyListActualNode);
     }
 
     /**
@@ -283,6 +331,9 @@ public class LinkedList2Test extends TestCase {
         assertEquals("Multiply list with several elem. Remove All from middle: count", 2, middleSeveralElemsTestInMultiplyList.count());
     }
 
+    /**
+     clear
+     */
     @Test
     public void testClear() {
         setUpLists();
@@ -334,6 +385,9 @@ public class LinkedList2Test extends TestCase {
         assertEquals(0, emptyList.count());
     }
 
+    /**
+     find all
+     */
     @Test
     public void testFindAll() {
         setUpLists();
@@ -389,6 +443,9 @@ public class LinkedList2Test extends TestCase {
         }
     }
 
+    /**
+     count
+     */
     @Test
     public void testCount() {
         setUpLists();
@@ -398,6 +455,9 @@ public class LinkedList2Test extends TestCase {
         assertEquals(4, tailSeveralElemsTestInMultiplyList.count());
     }
 
+    /**
+     insert after
+     */
     @Test
     public void testInsertAfter() {
         setUpLists();

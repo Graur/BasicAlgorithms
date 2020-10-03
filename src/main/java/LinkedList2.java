@@ -4,6 +4,7 @@ public class LinkedList2
 {
     public Node head;
     public Node tail;
+    private int size;
 
     public LinkedList2()
     {
@@ -26,21 +27,52 @@ public class LinkedList2
 
     public Node find(int _value)
     {
-        // здесь будет ваш код поиска
+        Node node = this.head;
+        while (node != null) {
+            if (node.value == _value)
+                return node;
+            node = node.next;
+        }
         return null;
     }
 
     public ArrayList<Node> findAll(int _value)
     {
         ArrayList<Node> nodes = new ArrayList<Node>();
-        // здесь будет ваш код поиска всех узлов по заданному значению
+        Node node = this.head;
+        while (node != null) {
+            if (node.value == _value)
+                nodes.add(node);
+            node = node.next;
+        }
+
         return nodes;
     }
 
     public boolean remove(int _value)
     {
-        // здесь будет ваш код удаления одного узла по заданному значению
-        return true; // если узел был удалён
+        Node node = find(_value);
+        if (node != null) {
+            Node prevNode = node.prev;
+            unlinkNode(prevNode, node);
+            size--;
+            return true;
+        }
+        return false;
+    }
+
+    private void unlinkNode(Node _prevNode, Node _removableNode) {
+        Node next = _removableNode.next;
+
+        if (_prevNode == null) {
+            head = next;
+        } else {
+            _prevNode.next = next;
+        }
+
+        if (next == null) {
+            tail = _prevNode;
+        }
     }
 
     public void removeAll(int _value)
