@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
@@ -22,6 +21,8 @@ public class LinkedList2Test extends TestCase {
     private LinkedList2 middleElemTestInMultiplyList;
 
     private LinkedList2 middleSeveralElemsTestInMultiplyList;
+
+    private LinkedList2 middleSeveralElemsTestInMultiplyList2;
 
     private LinkedList2 tailElemTestInMultiplyList;
 
@@ -70,6 +71,13 @@ public class LinkedList2Test extends TestCase {
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(4));
+
+        middleSeveralElemsTestInMultiplyList2 = new LinkedList2();
+        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(1));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(99999));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(3));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(99999));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(5));
 
         tailElemTestInMultiplyList = new LinkedList2();
         tailElemTestInMultiplyList.addInTail(new Node(1));
@@ -248,16 +256,22 @@ public class LinkedList2Test extends TestCase {
         oneElemListWithoutTestValue.removeAll(testedValue);
         assertEquals("Single list with elem. Remove All from start: head", 1, oneElemListWithoutTestValue.head.value);
         assertEquals("Single list with elem. Remove All from start: tail", 1, oneElemListWithoutTestValue.tail.value);
+        assertNull(oneElemListWithoutTestValue.head.prev);
+        assertNull(oneElemListWithoutTestValue.tail.next);
         assertEquals("Single list with elem. Remove All from start: count", 1, oneElemListWithoutTestValue.count());
 
         startElemTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with single elem. Remove All from start: head", 2, startElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove All from start: tail", 4, startElemTestInMultiplyList.tail.value);
+        assertNull(startElemTestInMultiplyList.head.prev);
+        assertNull(startElemTestInMultiplyList.tail.next);
         assertEquals("Multiply list with single elem. Remove All from start: count", 3, startElemTestInMultiplyList.count());
 
         startSeveralElemsTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with several elem. Remove All from start: head", 3, startSeveralElemsTestInMultiplyList.head.value);
         assertEquals("Multiply list with several elem. Remove All from start: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
+        assertNull(startSeveralElemsTestInMultiplyList.head.prev);
+        assertNull(startSeveralElemsTestInMultiplyList.tail.next);
         assertEquals("Multiply list with several elem. Remove All from start: count", 2, startSeveralElemsTestInMultiplyList.count());
     }
 
@@ -265,60 +279,50 @@ public class LinkedList2Test extends TestCase {
     public void testRemoveAllFromTail() {
         setUpLists();
 
-        emptyList.removeAll(testedValue);
-        assertNull("Empty list with elem. Remove All from tail: head", emptyList.head);
-        assertNull("Empty list with elem. Remove All from tail: tail", emptyList.tail);
-        assertEquals("Empty list with elem. Remove All from tail: count", 0, emptyList.count());
-
-        oneElemListWithTestValue.removeAll(testedValue);
-        assertNull("Single list with elem. Remove All from tail: head", oneElemListWithTestValue.head);
-        assertNull("Single list with elem. Remove All from tail: tail", oneElemListWithTestValue.tail);
-        assertEquals("Single list with elem. Remove All from tail: count", 0, oneElemListWithTestValue.count());
-
-        oneElemListWithoutTestValue.removeAll(testedValue);
-        assertEquals("Single list with elem. Remove All from tail: head", 1, oneElemListWithoutTestValue.head.value);
-        assertEquals("Single list with elem. Remove All from tail: tail", 1, oneElemListWithoutTestValue.tail.value);
-        assertEquals("Single list with elem. Remove All from tail: count", 1, oneElemListWithoutTestValue.count());
-
         tailElemTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with single elem. Remove All from tail: head", 1, tailElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove All from tail: tail", 3, tailElemTestInMultiplyList.tail.value);
+        assertEquals(2, tailElemTestInMultiplyList.tail.prev.value);
+        assertNull(tailElemTestInMultiplyList.head.prev);
+        assertNull(tailElemTestInMultiplyList.tail.next);
         assertEquals("Multiply list with single elem. Remove All from tail: count", 3, tailElemTestInMultiplyList.count());
 
-        startSeveralElemsTestInMultiplyList.removeAll(testedValue);
-        assertEquals("Multiply list with several elem. Remove All from tail: head", 3, startSeveralElemsTestInMultiplyList.head.value);
-        assertEquals("Multiply list with several elem. Remove All from tail: tail", 4, startSeveralElemsTestInMultiplyList.tail.value);
-        assertEquals("Multiply list with several elem. Remove All from tail: count", 2, startSeveralElemsTestInMultiplyList.count());
+        tailSeveralElemsTestInMultiplyList.removeAll(testedValue);
+        assertEquals("Multiply list with several elem. Remove All from tail: head", 1, tailSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from tail: tail", 2, tailSeveralElemsTestInMultiplyList.tail.value);
+        assertNull(tailSeveralElemsTestInMultiplyList.head.prev);
+        assertNull(tailSeveralElemsTestInMultiplyList.tail.next);
+        assertEquals("Multiply list with several elem. Remove All from tail: count", 2, tailSeveralElemsTestInMultiplyList.count());
     }
 
     @Test
     public void testRemoveAllFromMiddle() {
         setUpLists();
 
-        emptyList.removeAll(testedValue);
-        assertNull("Empty list with elem. Remove All from middle: head", emptyList.head);
-        assertNull("Empty list with elem. Remove All from middle: tail", emptyList.tail);
-        assertEquals("Empty list with elem. Remove All from middle: count", 0, emptyList.count());
-
-        oneElemListWithTestValue.removeAll(testedValue);
-        assertNull("Single list with elem. Remove All from middle: head", oneElemListWithTestValue.head);
-        assertNull("Single list with elem. Remove All from middle: tail", oneElemListWithTestValue.tail);
-        assertEquals("Single list with elem. Remove All from middle: count", 0, oneElemListWithTestValue.count());
-
-        oneElemListWithoutTestValue.removeAll(testedValue);
-        assertEquals("Single list with elem. Remove All from middle: head", 1, oneElemListWithoutTestValue.head.value);
-        assertEquals("Single list with elem. Remove All from middle: tail", 1, oneElemListWithoutTestValue.tail.value);
-        assertEquals("Single list with elem. Remove All from middle: count", 1, oneElemListWithoutTestValue.count());
-
         middleElemTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with single elem. Remove All from middle: head", 1, middleElemTestInMultiplyList.head.value);
         assertEquals("Multiply list with single elem. Remove All from middle: tail", 4, middleElemTestInMultiplyList.tail.value);
+        assertNull(middleElemTestInMultiplyList.head.prev);
+        assertNull(middleElemTestInMultiplyList.tail.next);
         assertEquals("Multiply list with single elem. Remove All from middle: count", 3, middleElemTestInMultiplyList.count());
 
         middleSeveralElemsTestInMultiplyList.removeAll(testedValue);
         assertEquals("Multiply list with several elem. Remove All from middle: head", 1, middleSeveralElemsTestInMultiplyList.head.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: head", 4, middleSeveralElemsTestInMultiplyList.head.next.value);
         assertEquals("Multiply list with several elem. Remove All from middle: tail", 4, middleSeveralElemsTestInMultiplyList.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: tail", 1, middleSeveralElemsTestInMultiplyList.tail.prev.value);
+        assertNull(middleSeveralElemsTestInMultiplyList.head.prev);
+        assertNull(middleSeveralElemsTestInMultiplyList.tail.next);
         assertEquals("Multiply list with several elem. Remove All from middle: count", 2, middleSeveralElemsTestInMultiplyList.count());
+
+        middleSeveralElemsTestInMultiplyList2.removeAll(testedValue);
+        assertEquals("Multiply list with several elem. Remove All from middle: head", 1, middleSeveralElemsTestInMultiplyList2.head.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: head", 3, middleSeveralElemsTestInMultiplyList2.head.next.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: tail", 5, middleSeveralElemsTestInMultiplyList2.tail.value);
+        assertEquals("Multiply list with several elem. Remove All from middle: tail", 3, middleSeveralElemsTestInMultiplyList2.tail.prev.value);
+        assertNull(middleSeveralElemsTestInMultiplyList2.head.prev);
+        assertNull(middleSeveralElemsTestInMultiplyList2.tail.next);
+        assertEquals("Multiply list with several elem. Remove All from middle: count", 3, middleSeveralElemsTestInMultiplyList2.count());
     }
 
     /**

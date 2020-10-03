@@ -79,16 +79,26 @@ public class LinkedList2
                 _prevNode.next.prev = _prevNode;
             }
         }
+        _removableNode = null;
     }
 
     public void removeAll(int _value)
     {
-        // здесь будет ваш код удаления всех узлов по заданному значению
+        Node node = this.head;
+        while (node != null) {
+            if (node.value == _value) {
+                unlinkNode(node.prev, node);
+                size--;
+            }
+            node = node.next;
+        }
     }
 
     public void clear()
     {
-        // здесь будет ваш код очистки всего списка
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
     }
 
     public int count()
@@ -98,10 +108,24 @@ public class LinkedList2
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        // здесь будет ваш код вставки узла после заданного узла
-
-        // если _nodeAfter = null
-        // добавьте новый элемент первым в списке
+        if (_nodeAfter == null) {
+            _nodeToInsert.next = this.head;
+            this.head = _nodeToInsert;
+            if (this.tail == null) {
+                this.tail = this.head;
+            }
+            size++;
+        } else {
+            Node node = find(_nodeAfter.value);
+            if (node != null) {
+                if (node == tail) {
+                    this.tail = _nodeToInsert;
+                }
+                _nodeToInsert.next = node.next;
+                node.next = _nodeToInsert;
+                size++;
+            }
+        }
     }
 }
 
