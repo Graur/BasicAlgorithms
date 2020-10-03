@@ -118,10 +118,16 @@ public class LinkedList
         if (_nodeAfter == null) {
             _nodeToInsert.next = this.head;
             this.head = _nodeToInsert;
+            if (this.tail == null) {
+                this.tail = this.head;
+            }
             size++;
         } else {
             Node node = find(_nodeAfter.value);
             if (node != null) {
+                if (node == tail) {
+                    this.tail = _nodeToInsert;
+                }
                 _nodeToInsert.next = node.next;
                 node.next = _nodeToInsert;
                 size++;
