@@ -8,89 +8,89 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @RunWith(JUnit4.class)
-public class LinkedListTest extends TestCase {
+public class LinkedList2Test extends TestCase {
 
     private static final int TEST_ITERATE_NUMBER = 10000;
 
-    private LinkedList largeList;
+    private LinkedList2 largeList;
 
-    private LinkedList startElemTestInMultiplyList;
+    private LinkedList2 startElemTestInMultiplyList;
 
-    private LinkedList startSeveralElemsTestInMultiplyList;
+    private LinkedList2 startSeveralElemsTestInMultiplyList;
 
-    private LinkedList middleElemTestInMultiplyList;
+    private LinkedList2 middleElemTestInMultiplyList;
 
-    private LinkedList middleSeveralElemsTestInMultiplyList;
+    private LinkedList2 middleSeveralElemsTestInMultiplyList;
 
-    private LinkedList tailElemTestInMultiplyList;
+    private LinkedList2 tailElemTestInMultiplyList;
 
-    private LinkedList tailSeveralElemsTestInMultiplyList;
+    private LinkedList2 tailSeveralElemsTestInMultiplyList;
 
-    private LinkedList oneElemListWithTestValue;
+    private LinkedList2 oneElemListWithTestValue;
 
-    private LinkedList oneElemListWithoutTestValue;
+    private LinkedList2 oneElemListWithoutTestValue;
 
-    private LinkedList emptyList;
+    private LinkedList2 emptyList;
 
     private int testedValue = 99999;
 
     private Node testedNode = new Node(testedValue);
 
-    private LinkedList expectedList;
+    private LinkedList2 expectedList;
 
     @Before
     public void setUpLists() {
-        largeList = new LinkedList();
+        largeList = new LinkedList2();
 
         for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
             largeList.addInTail(new Node(new Random().nextInt()));
         }
 
-        startElemTestInMultiplyList = new LinkedList();
+        startElemTestInMultiplyList = new LinkedList2();
         startElemTestInMultiplyList.addInTail(new Node(99999));
         startElemTestInMultiplyList.addInTail(new Node(2));
         startElemTestInMultiplyList.addInTail(new Node(3));
         startElemTestInMultiplyList.addInTail(new Node(4));
 
-        startSeveralElemsTestInMultiplyList = new LinkedList();
+        startSeveralElemsTestInMultiplyList = new LinkedList2();
         startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         startSeveralElemsTestInMultiplyList.addInTail(new Node(3));
         startSeveralElemsTestInMultiplyList.addInTail(new Node(4));
 
-        middleElemTestInMultiplyList = new LinkedList();
+        middleElemTestInMultiplyList = new LinkedList2();
         middleElemTestInMultiplyList.addInTail(new Node(1));
         middleElemTestInMultiplyList.addInTail(new Node(99999));
         middleElemTestInMultiplyList.addInTail(new Node(3));
         middleElemTestInMultiplyList.addInTail(new Node(4));
 
-        middleSeveralElemsTestInMultiplyList = new LinkedList();
+        middleSeveralElemsTestInMultiplyList = new LinkedList2();
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(1));
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         middleSeveralElemsTestInMultiplyList.addInTail(new Node(4));
 
-        tailElemTestInMultiplyList = new LinkedList();
+        tailElemTestInMultiplyList = new LinkedList2();
         tailElemTestInMultiplyList.addInTail(new Node(1));
         tailElemTestInMultiplyList.addInTail(new Node(2));
         tailElemTestInMultiplyList.addInTail(new Node(3));
         tailElemTestInMultiplyList.addInTail(new Node(99999));
 
-        tailSeveralElemsTestInMultiplyList = new LinkedList();
+        tailSeveralElemsTestInMultiplyList = new LinkedList2();
         tailSeveralElemsTestInMultiplyList.addInTail(new Node(1));
         tailSeveralElemsTestInMultiplyList.addInTail(new Node(2));
         tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
         tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
 
-        oneElemListWithTestValue = new LinkedList();
+        oneElemListWithTestValue = new LinkedList2();
         oneElemListWithTestValue.addInTail(new Node(99999));
 
-        oneElemListWithoutTestValue = new LinkedList();
+        oneElemListWithoutTestValue = new LinkedList2();
         oneElemListWithoutTestValue.addInTail(new Node(1));
 
-        emptyList = new LinkedList();
+        emptyList = new LinkedList2();
 
-        expectedList = new LinkedList();
+        expectedList = new LinkedList2();
         expectedList.addInTail(new Node(1));
         expectedList.addInTail(new Node(2));
         expectedList.addInTail(new Node(3));
