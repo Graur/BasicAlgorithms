@@ -23,6 +23,7 @@ public class LinkedList2
             _item.prev = tail;
         }
         this.tail = _item;
+        size++;
     }
 
     public Node find(int _value)
@@ -53,8 +54,7 @@ public class LinkedList2
     {
         Node node = find(_value);
         if (node != null) {
-            Node prevNode = node.prev;
-            unlinkNode(prevNode, node);
+            unlinkNode(node.prev, node);
             size--;
             return true;
         }
@@ -65,13 +65,19 @@ public class LinkedList2
         Node next = _removableNode.next;
 
         if (_prevNode == null) {
-            head = next;
+            this.head = next;
+            if (this.head != null) {
+                this.head.prev = null;
+            } else {
+                this.tail = this.head;
+            }
         } else {
             _prevNode.next = next;
-        }
-
-        if (next == null) {
-            tail = _prevNode;
+            if (next == null) {
+                this.tail = _prevNode;
+            } else {
+                _prevNode.next.prev = _prevNode;
+            }
         }
     }
 
@@ -87,7 +93,7 @@ public class LinkedList2
 
     public int count()
     {
-        return 0; // здесь будет ваш код подсчёта количества элементов в списке
+        return size;
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
