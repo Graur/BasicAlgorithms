@@ -34,9 +34,9 @@ public class LinkedList2Test extends TestCase {
 
     private LinkedList2 emptyList;
 
-    private int testedValue = 99999;
+    private int testedValue;
 
-    private Node testedNode = new Node(testedValue);
+    private Node testedNode;
 
     private LinkedList2 expectedList;
 
@@ -47,6 +47,9 @@ public class LinkedList2Test extends TestCase {
         for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
             largeList.addInTail(new Node(new Random().nextInt()));
         }
+
+        testedValue  = 99999;
+        testedNode = new Node(testedValue);
 
         startElemTestInMultiplyList = new LinkedList2();
         startElemTestInMultiplyList.addInTail(new Node(99999));
@@ -460,7 +463,7 @@ public class LinkedList2Test extends TestCase {
         assertEquals(testedValue, tailElemTestInMultiplyList.head.value);
         assertEquals(1, tailElemTestInMultiplyList.head.next.value);
         assertNull(tailElemTestInMultiplyList.head.prev);
-        assertEquals(testedValue, tailElemTestInMultiplyList.tail.next.prev.value);
+        assertEquals(testedValue, tailElemTestInMultiplyList.head.next.prev.value);
         assertEquals(testedValue, tailElemTestInMultiplyList.tail.value);
         assertEquals(5, tailElemTestInMultiplyList.count());
 
@@ -470,9 +473,11 @@ public class LinkedList2Test extends TestCase {
         assertEquals(1, tailElemTestInMultiplyList.head.value);
         assertEquals(testedValue, tailElemTestInMultiplyList.head.next.value);
         assertNull(tailElemTestInMultiplyList.head.prev);
-        assertEquals(testedValue, tailElemTestInMultiplyList.head.next.prev.value);
+        assertEquals(1, tailElemTestInMultiplyList.head.next.prev.value);
         assertEquals(2, tailElemTestInMultiplyList.head.next.next.value);
         assertEquals(5, tailElemTestInMultiplyList.count());
+
+        setUpLists();
 
         startElemTestInMultiplyList.insertAfter(new Node(4), testedNode);
         assertEquals(testedValue, startElemTestInMultiplyList.head.value);
@@ -482,6 +487,8 @@ public class LinkedList2Test extends TestCase {
         assertEquals(4, startElemTestInMultiplyList.tail.prev.value);
         assertEquals(5, startElemTestInMultiplyList.count());
 
+        setUpLists();
+
         oneElemListWithoutTestValue.insertAfter(new Node(1), testedNode);
         assertEquals(1, oneElemListWithoutTestValue.head.value);
         assertEquals(testedValue, oneElemListWithoutTestValue.head.next.value);
@@ -490,6 +497,8 @@ public class LinkedList2Test extends TestCase {
         assertEquals(testedValue, oneElemListWithoutTestValue.tail.value);
         assertEquals(1, oneElemListWithoutTestValue.tail.prev.value);
         assertEquals(2, oneElemListWithoutTestValue.count());
+
+        setUpLists();
 
         emptyList.insertAfter(null, testedNode);
         assertEquals(testedValue, emptyList.head.value);

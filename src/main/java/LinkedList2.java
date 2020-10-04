@@ -111,6 +111,9 @@ public class LinkedList2
         if (_nodeAfter == null) {
             _nodeToInsert.next = this.head;
             this.head = _nodeToInsert;
+            if (this.head.next != null) {
+                this.head.next.prev = _nodeToInsert;
+            }
             if (this.tail == null) {
                 this.tail = this.head;
             }
