@@ -50,6 +50,13 @@ public class DynArrayTest extends TestCase {
 
     @Test
     public void testAppend() {
+        setUp();
+        fillArray(3);
+        assertEquals(16, array.capacity);
+        assertEquals(3, array.count);
+        fillArray(14);
+        assertEquals(32, array.capacity);
+        assertEquals(17, array.count);
     }
 
     @Test
