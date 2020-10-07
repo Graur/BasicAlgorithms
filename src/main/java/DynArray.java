@@ -1,8 +1,11 @@
+import java.lang.reflect.Array;
+
 public class DynArray<T>
 {
     public T [] array;
     public int count;
     public int capacity;
+    private static final int DEFAULT_CAPACITY = 16;
     Class clazz;
 
     public DynArray(Class clz)
@@ -16,24 +19,39 @@ public class DynArray<T>
 
     public void makeArray(int new_capacity)
     {
-        // array = (T[]) Array.newInstance(this.clazz, new_capacity);
-        // ваш код
+        if (array == null && new_capacity <= DEFAULT_CAPACITY) {
+            array = (T[]) Array.newInstance(this.clazz, new_capacity);
+            capacity = DEFAULT_CAPACITY;
+        } else if (new_capacity > DEFAULT_CAPACITY) {
+            T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
+            System.arraycopy(array, 0, buffer, 0, count);
+            int newCapacity = capacity * 2;
+            array = (T[]) Array.newInstance(this.clazz, newCapacity);
+            capacity = newCapacity;
+        }
     }
 
     public T getItem(int index)
     {
-        // ваш код
-        return null;
+        if (index >=0 && index < count) {
+            return array[index];
+        } else {
+            throw new ArrayIndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
+        }
     }
 
     public void append(T itm)
     {
-        // ваш код
+        if (count >= capacity - 1) {
+            makeArray(count + 1);
+        }
+        array[count] = itm;
+        count++;
     }
 
     public void insert(T itm, int index)
     {
-        // ваш код
+        array[index] = itm;
     }
 
     public void remove(int index)
