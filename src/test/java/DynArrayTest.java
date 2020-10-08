@@ -60,7 +60,21 @@ public class DynArrayTest extends TestCase {
     }
 
     @Test
-    public void testInsert() {
+    public void testInsertInTail() {
+        setUp();
+        fillArray(3);
+        array.insert(4, 3);
+        assertEquals(Integer.valueOf(4), array.getItem(3));
+        assertEquals(4, array.count);
+    }
+
+    @Test
+    public void testInsertInTheStart() {
+        setUp();
+        fillArray(3);
+        array.insert(999, 0);
+        assertEquals(Integer.valueOf(999), array.getItem(0));
+        assertEquals(4, array.count);
     }
 
     @Test

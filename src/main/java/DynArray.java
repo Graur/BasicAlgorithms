@@ -51,7 +51,12 @@ public class DynArray<T>
 
     public void insert(T itm, int index)
     {
-        array[index] = itm;
+        if (index == count) {
+            array[index] = itm;
+            count++;
+        } else if (index >= 0 && index < count) {
+
+        }
     }
 
     public void remove(int index)
