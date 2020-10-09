@@ -24,9 +24,9 @@ public class DynArray<T>
             capacity = DEFAULT_CAPACITY;
         } else if (new_capacity > DEFAULT_CAPACITY) {
             T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
-            System.arraycopy(array, 0, buffer, 0, count);
             int newCapacity = capacity * 2;
-            array = (T[]) Array.newInstance(this.clazz, newCapacity);
+            System.arraycopy(array, 0, buffer, 0, newCapacity);
+            array = buffer;
             capacity = newCapacity;
         }
     }
@@ -36,13 +36,13 @@ public class DynArray<T>
         if (index >=0 && index < count) {
             return array[index];
         } else {
-            throw new ArrayIndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
+            throw new IndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
         }
     }
 
     public void append(T itm)
     {
-        if (count >= capacity - 1) {
+        if (count == capacity) {
             makeArray(count + 1);
         }
         array[count] = itm;
@@ -51,11 +51,19 @@ public class DynArray<T>
 
     public void insert(T itm, int index)
     {
-        if (index == count) {
+        if (index == count + 1) {
+            append(itm);
+        } else if (index >= 0 && index <= count) {
+            if (count + 1 > capacity) {
+                makeArray(capacity + 1);
+            }
+            System.arraycopy(array, index,
+                    array, index + 1,
+                    count - index);
             array[index] = itm;
             count++;
-        } else if (index >= 0 && index < count) {
-
+        } else {
+            throw new IndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
         }
     }
 
