@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 public class DynArrayTest extends TestCase {
 
     private DynArray<Integer> array;
+
     @Before
     public void setUp() {
         array = new DynArray<Integer>(Integer.class);
@@ -30,6 +31,14 @@ public class DynArrayTest extends TestCase {
         fillArray(17);
         assertEquals(32, array.capacity);
         assertEquals(17, array.count);
+    }
+
+    @Test
+    public void testMakeArray2() {
+        setUp();
+        array.makeArray(12);
+        assertEquals(12, array.capacity);
+        assertEquals(0, array.count);
     }
 
     //GET

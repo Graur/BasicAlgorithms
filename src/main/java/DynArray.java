@@ -22,12 +22,7 @@ public class DynArray<T>
         if (count == 0 && new_capacity == DEFAULT_CAPACITY) {
             array = (T[]) Array.newInstance(this.clazz, new_capacity);
             capacity = DEFAULT_CAPACITY;
-        } else if (new_capacity > capacity) {
-            T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
-            System.arraycopy(array, 0, buffer, 0, count);
-            array = buffer;
-            capacity = new_capacity;
-        } else if (new_capacity < capacity) {
+        } else if (new_capacity > capacity || new_capacity < capacity) {
             T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
             System.arraycopy(array, 0, buffer, 0, count);
             array = buffer;
