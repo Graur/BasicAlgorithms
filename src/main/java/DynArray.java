@@ -77,7 +77,10 @@ public class DynArray<T>
             array[newCount] = null;
             count = newCount;
             int newCapacity = (int) (capacity / 1.5);
-            if (count < capacity * 0.5 && newCapacity > 16) {
+            if (count < capacity * 0.5) {
+                if (newCapacity < 16) {
+                    newCapacity = 16;
+                }
                 makeArray(newCapacity);
             }
         } else {

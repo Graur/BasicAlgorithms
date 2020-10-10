@@ -250,4 +250,26 @@ public class DynArrayTest extends TestCase {
         assertEquals(46, array.count);
         assertEquals(64, array.capacity);
     }
+
+    @Test
+    public void testRemoveFromStart6() {
+        setUp();
+        fillArray(17);
+        assertEquals(32, array.capacity);
+        array.remove(0);
+        array.remove(0);
+        assertEquals(Integer.valueOf(2), array.getItem(0));
+        assertEquals(Integer.valueOf(3), array.getItem(1));
+        assertEquals(Integer.valueOf(16), array.getItem(14));
+        assertEquals(15, array.count);
+        assertEquals(21, array.capacity);
+        array.remove(0);
+        array.remove(0);
+        array.remove(0);
+        array.remove(0);
+        array.remove(0);
+        array.remove(0);
+        assertEquals(9, array.count);
+        assertEquals(16, array.capacity);
+    }
 }
