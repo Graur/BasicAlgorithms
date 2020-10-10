@@ -19,15 +19,19 @@ public class DynArray<T>
 
     public void makeArray(int new_capacity)
     {
-        if (array == null && new_capacity <= DEFAULT_CAPACITY) {
+        if (count == 0 && new_capacity == DEFAULT_CAPACITY) {
             array = (T[]) Array.newInstance(this.clazz, new_capacity);
             capacity = DEFAULT_CAPACITY;
         } else if (new_capacity > capacity) {
-            int newCapacity = capacity * 2;
-            T[] buffer = (T[]) Array.newInstance(this.clazz, newCapacity);
+            T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
             System.arraycopy(array, 0, buffer, 0, count);
             array = buffer;
-            capacity = newCapacity;
+            capacity = new_capacity;
+        } else if (new_capacity < capacity) {
+            T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
+            System.arraycopy(array, 0, buffer, 0, count);
+            array = buffer;
+            capacity = new_capacity;
         }
     }
 
@@ -43,7 +47,7 @@ public class DynArray<T>
     public void append(T itm)
     {
         if (count == capacity) {
-            makeArray(count + 1);
+            makeArray(capacity * 2);
         }
         array[count] = itm;
         count++;
@@ -56,7 +60,7 @@ public class DynArray<T>
         } else if (index >= 0 && index < count) {
             int newCount = count + 1;
             if (newCount > capacity) {
-                makeArray(newCount);
+                makeArray(capacity * 2);
             }
             System.arraycopy(array, index,
                     array, index + 1,
@@ -77,6 +81,10 @@ public class DynArray<T>
                     newCount - index);
             array[newCount] = null;
             count = newCount;
+            int newCapacity = (int) (capacity / 1.5);
+            if (count < capacity * 0.5 && newCapacity > 16) {
+                makeArray(newCapacity);
+            }
         } else {
             throw new IndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
         }
