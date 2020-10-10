@@ -51,9 +51,9 @@ public class DynArray<T>
 
     public void insert(T itm, int index)
     {
-        if (index == count + 1) {
+        if (index == count) {
             append(itm);
-        } else if (index >= 0 && index <= count) {
+        } else if (index >= 0 && index < count) {
             if (count + 1 > capacity) {
                 makeArray(capacity + 1);
             }
@@ -69,7 +69,16 @@ public class DynArray<T>
 
     public void remove(int index)
     {
-        // ваш код
+        if (index >= 0 && index < count) {
+            int newCount = count - 1;
+            System.arraycopy(array, index + 1,
+                    array, index,
+                    newCount - index);
+            array[newCount] = null;
+            count = newCount;
+        } else {
+            throw new IndexOutOfBoundsException("Index is: " + index + ", but array size is: " + count);
+        }
     }
 
 }
