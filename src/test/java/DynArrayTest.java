@@ -219,14 +219,14 @@ public class DynArrayTest extends TestCase {
         array.remove(0);
         assertEquals(Integer.valueOf(1), array.getItem(0));
         assertEquals(Integer.valueOf(2), array.getItem(1));
-        assertEquals(Integer.valueOf(33), array.getItem(32));
+        assertEquals(Integer.valueOf(32), array.getItem(31));
         assertEquals(32, array.count);
         assertEquals(64, array.capacity);
 
         array.remove(0);
         assertEquals(Integer.valueOf(2), array.getItem(0));
         assertEquals(Integer.valueOf(3), array.getItem(1));
-        assertEquals(Integer.valueOf(33), array.getItem(31));
+        assertEquals(Integer.valueOf(32), array.getItem(30));
         assertEquals(31, array.count);
         assertEquals(42, array.capacity);
     }
