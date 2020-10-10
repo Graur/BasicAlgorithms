@@ -37,11 +37,11 @@ public class DynArrayTest extends TestCase {
     public void testGetItem() {
         setUp();
         fillArray(3);
-        assertEquals(1, array.getItem(0).intValue());
-        assertEquals(2, array.getItem(1).intValue());
+        assertEquals(0, array.getItem(0).intValue());
+        assertEquals(1, array.getItem(1).intValue());
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGetItemException() {
         setUp();
         fillArray(3);
@@ -84,7 +84,6 @@ public class DynArrayTest extends TestCase {
         array.insert(999, 0);
         assertEquals(Integer.valueOf(999), array.getItem(0));
         assertEquals(4, array.count);
-
     }
 
     @Test

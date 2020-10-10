@@ -25,7 +25,7 @@ public class DynArray<T>
         } else if (new_capacity > DEFAULT_CAPACITY) {
             T[] buffer = (T[]) Array.newInstance(this.clazz, new_capacity);
             int newCapacity = capacity * 2;
-            System.arraycopy(array, 0, buffer, 0, newCapacity);
+            System.arraycopy(array, 0, buffer, 0, count);
             array = buffer;
             capacity = newCapacity;
         }
