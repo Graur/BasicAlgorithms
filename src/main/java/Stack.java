@@ -2,31 +2,44 @@ import java.util.*;
 
 public class Stack<T>
 {
+
+    private LinkedList<Object> data;
+
+    private int size;
+
     public Stack()
     {
-        // инициализация внутреннего хранилища стека
+        data = new LinkedList<>();
+        size = 0;
     }
 
     public int size()
     {
-        // размер текущего стека
-        return 0;
+        return size;
     }
 
     public T pop()
     {
-        // ваш код
-        return null;  // если стек пустой
+        if (size == 0) {
+            return null;  // если стек пустой
+        } else {
+            size--;
+            return (T) data.pop();
+        }
     }
 
     public void push(T val)
     {
-        // ваш код
+        data.push(val);
+        size++;
     }
 
     public T peek()
     {
-        // ваш код
-        return null; // если стек пустой
+        if (size == 0) {
+            return null; // если стек пустой
+        } else {
+            return (T) data.get(size);
+        }
     }
 }
