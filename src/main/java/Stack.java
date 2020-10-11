@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Stack<T>
 {
-
     private LinkedList<Object> data;
 
     private int size;
@@ -39,7 +38,7 @@ public class Stack<T>
         if (size == 0) {
             return null; // если стек пустой
         } else {
-            return (T) data.get(size);
+            return (T) data.peek();
         }
     }
 }
