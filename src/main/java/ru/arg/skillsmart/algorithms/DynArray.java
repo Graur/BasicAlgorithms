@@ -1,3 +1,5 @@
+package ru.arg.skillsmart.algorithms;
+
 import java.lang.reflect.Array;
 
 public class DynArray<T>
@@ -11,7 +13,7 @@ public class DynArray<T>
     public DynArray(Class clz)
     {
         clazz = clz; // нужен для безопасного приведения типов
-        // new DynArray<Integer>(Integer.class);
+        // new ru.arg.skillsmart.algorithms.DynArray<Integer>(Integer.class);
 
         count = 0;
         makeArray(16);

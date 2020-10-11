@@ -3,6 +3,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import ru.arg.skillsmart.algorithms.LinkedList2;
+import ru.arg.skillsmart.algorithms.LinkedList2Node;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -36,7 +38,7 @@ public class LinkedList2Test extends TestCase {
 
     private int testedValue;
 
-    private Node testedNode;
+    private LinkedList2Node testedLinkedList2Node;
 
     private LinkedList2 expectedList;
 
@@ -45,68 +47,68 @@ public class LinkedList2Test extends TestCase {
         largeList = new LinkedList2();
 
         for (int i = 0; i < TEST_ITERATE_NUMBER; i++) {
-            largeList.addInTail(new Node(new Random().nextInt()));
+            largeList.addInTail(new LinkedList2Node(new Random().nextInt()));
         }
 
         testedValue  = 99999;
-        testedNode = new Node(testedValue);
+        testedLinkedList2Node = new LinkedList2Node(testedValue);
 
         startElemTestInMultiplyList = new LinkedList2();
-        startElemTestInMultiplyList.addInTail(new Node(99999));
-        startElemTestInMultiplyList.addInTail(new Node(2));
-        startElemTestInMultiplyList.addInTail(new Node(3));
-        startElemTestInMultiplyList.addInTail(new Node(4));
+        startElemTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        startElemTestInMultiplyList.addInTail(new LinkedList2Node(2));
+        startElemTestInMultiplyList.addInTail(new LinkedList2Node(3));
+        startElemTestInMultiplyList.addInTail(new LinkedList2Node(4));
 
         startSeveralElemsTestInMultiplyList = new LinkedList2();
-        startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
-        startSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
-        startSeveralElemsTestInMultiplyList.addInTail(new Node(3));
-        startSeveralElemsTestInMultiplyList.addInTail(new Node(4));
+        startSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        startSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        startSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(3));
+        startSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(4));
 
         middleElemTestInMultiplyList = new LinkedList2();
-        middleElemTestInMultiplyList.addInTail(new Node(1));
-        middleElemTestInMultiplyList.addInTail(new Node(99999));
-        middleElemTestInMultiplyList.addInTail(new Node(3));
-        middleElemTestInMultiplyList.addInTail(new Node(4));
+        middleElemTestInMultiplyList.addInTail(new LinkedList2Node(1));
+        middleElemTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        middleElemTestInMultiplyList.addInTail(new LinkedList2Node(3));
+        middleElemTestInMultiplyList.addInTail(new LinkedList2Node(4));
 
         middleSeveralElemsTestInMultiplyList = new LinkedList2();
-        middleSeveralElemsTestInMultiplyList.addInTail(new Node(1));
-        middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
-        middleSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
-        middleSeveralElemsTestInMultiplyList.addInTail(new Node(4));
+        middleSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(1));
+        middleSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        middleSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        middleSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(4));
 
         middleSeveralElemsTestInMultiplyList2 = new LinkedList2();
-        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(1));
-        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(99999));
-        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(3));
-        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(99999));
-        middleSeveralElemsTestInMultiplyList2.addInTail(new Node(5));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new LinkedList2Node(1));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new LinkedList2Node(99999));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new LinkedList2Node(3));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new LinkedList2Node(99999));
+        middleSeveralElemsTestInMultiplyList2.addInTail(new LinkedList2Node(5));
 
         tailElemTestInMultiplyList = new LinkedList2();
-        tailElemTestInMultiplyList.addInTail(new Node(1));
-        tailElemTestInMultiplyList.addInTail(new Node(2));
-        tailElemTestInMultiplyList.addInTail(new Node(3));
-        tailElemTestInMultiplyList.addInTail(new Node(99999));
+        tailElemTestInMultiplyList.addInTail(new LinkedList2Node(1));
+        tailElemTestInMultiplyList.addInTail(new LinkedList2Node(2));
+        tailElemTestInMultiplyList.addInTail(new LinkedList2Node(3));
+        tailElemTestInMultiplyList.addInTail(new LinkedList2Node(99999));
 
         tailSeveralElemsTestInMultiplyList = new LinkedList2();
-        tailSeveralElemsTestInMultiplyList.addInTail(new Node(1));
-        tailSeveralElemsTestInMultiplyList.addInTail(new Node(2));
-        tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
-        tailSeveralElemsTestInMultiplyList.addInTail(new Node(99999));
+        tailSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(1));
+        tailSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(2));
+        tailSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
+        tailSeveralElemsTestInMultiplyList.addInTail(new LinkedList2Node(99999));
 
         oneElemListWithTestValue = new LinkedList2();
-        oneElemListWithTestValue.addInTail(new Node(99999));
+        oneElemListWithTestValue.addInTail(new LinkedList2Node(99999));
 
         oneElemListWithoutTestValue = new LinkedList2();
-        oneElemListWithoutTestValue.addInTail(new Node(1));
+        oneElemListWithoutTestValue.addInTail(new LinkedList2Node(1));
 
         emptyList = new LinkedList2();
 
         expectedList = new LinkedList2();
-        expectedList.addInTail(new Node(1));
-        expectedList.addInTail(new Node(2));
-        expectedList.addInTail(new Node(3));
-        expectedList.addInTail(new Node(4));
+        expectedList.addInTail(new LinkedList2Node(1));
+        expectedList.addInTail(new LinkedList2Node(2));
+        expectedList.addInTail(new LinkedList2Node(3));
+        expectedList.addInTail(new LinkedList2Node(4));
     }
 
     /**
@@ -116,44 +118,44 @@ public class LinkedList2Test extends TestCase {
     public void testFind() {
         setUpLists();
 
-        Node fromStartInMultiplyListActualNode = startElemTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromStartInMultiplyListActualNode.value);
-        assertNull(fromStartInMultiplyListActualNode.prev);
-        assertEquals(2, fromStartInMultiplyListActualNode.next.value);
+        LinkedList2Node fromStartInMultiplyListActualLinkedList2Node = startElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromStartInMultiplyListActualLinkedList2Node.value);
+        assertNull(fromStartInMultiplyListActualLinkedList2Node.prev);
+        assertEquals(2, fromStartInMultiplyListActualLinkedList2Node.next.value);
 
-        Node fromStartInMultiplyListWithSeveralElemsActualNode = startSeveralElemsTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualNode.value);
-        assertNull(fromStartInMultiplyListWithSeveralElemsActualNode.prev);
-        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualNode.next.value);
+        LinkedList2Node fromStartInMultiplyListWithSeveralElemsActualLinkedList2Node = startSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualLinkedList2Node.value);
+        assertNull(fromStartInMultiplyListWithSeveralElemsActualLinkedList2Node.prev);
+        assertEquals(testedValue, fromStartInMultiplyListWithSeveralElemsActualLinkedList2Node.next.value);
 
-        Node fromMiddleInMultiplyListActualNode = middleElemTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromMiddleInMultiplyListActualNode.value);
-        assertEquals(1, fromMiddleInMultiplyListActualNode.prev.value);
-        assertEquals(3, fromMiddleInMultiplyListActualNode.next.value);
+        LinkedList2Node fromMiddleInMultiplyListActualLinkedList2Node = middleElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromMiddleInMultiplyListActualLinkedList2Node.value);
+        assertEquals(1, fromMiddleInMultiplyListActualLinkedList2Node.prev.value);
+        assertEquals(3, fromMiddleInMultiplyListActualLinkedList2Node.next.value);
 
-        Node fromMiddleInMultiplyListWithSeveralElemsActualNode = middleSeveralElemsTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualNode.value);
-        assertEquals(1, fromMiddleInMultiplyListWithSeveralElemsActualNode.prev.value);
-        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualNode.next.value);
+        LinkedList2Node fromMiddleInMultiplyListWithSeveralElemsActualLinkedList2Node = middleSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualLinkedList2Node.value);
+        assertEquals(1, fromMiddleInMultiplyListWithSeveralElemsActualLinkedList2Node.prev.value);
+        assertEquals(testedValue, fromMiddleInMultiplyListWithSeveralElemsActualLinkedList2Node.next.value);
 
-        Node fromTailInMultiplyListWithActualNode = tailElemTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromTailInMultiplyListWithActualNode.value);
-        assertEquals(3, fromTailInMultiplyListWithActualNode.prev.value);
-        assertNull(fromTailInMultiplyListWithActualNode.next);
+        LinkedList2Node fromTailInMultiplyListWithActualLinkedList2Node = tailElemTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromTailInMultiplyListWithActualLinkedList2Node.value);
+        assertEquals(3, fromTailInMultiplyListWithActualLinkedList2Node.prev.value);
+        assertNull(fromTailInMultiplyListWithActualLinkedList2Node.next);
 
-        Node fromTailInMultiplyListWithSeveralElemsActualNode = tailSeveralElemsTestInMultiplyList.find(testedValue);
-        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualNode.value);
-        assertEquals(2, fromTailInMultiplyListWithSeveralElemsActualNode.prev.value);
-        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualNode.next.value);
+        LinkedList2Node fromTailInMultiplyListWithSeveralElemsActualLinkedList2Node = tailSeveralElemsTestInMultiplyList.find(testedValue);
+        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualLinkedList2Node.value);
+        assertEquals(2, fromTailInMultiplyListWithSeveralElemsActualLinkedList2Node.prev.value);
+        assertEquals(testedValue, fromTailInMultiplyListWithSeveralElemsActualLinkedList2Node.next.value);
 
-        Node oneElemListWithValueActualNode = oneElemListWithTestValue.find(testedValue);
-        assertEquals(testedValue, oneElemListWithValueActualNode.value);
+        LinkedList2Node oneElemListWithValueActualLinkedList2Node = oneElemListWithTestValue.find(testedValue);
+        assertEquals(testedValue, oneElemListWithValueActualLinkedList2Node.value);
 
-        Node oneElemListWithoutValueActualNode = oneElemListWithoutTestValue.find(testedValue);
-        assertNull(oneElemListWithoutValueActualNode);
+        LinkedList2Node oneElemListWithoutValueActualLinkedList2Node = oneElemListWithoutTestValue.find(testedValue);
+        assertNull(oneElemListWithoutValueActualLinkedList2Node);
 
-        Node emptyListActualNode = emptyList.find(testedValue);
-        assertNull(emptyListActualNode);
+        LinkedList2Node emptyListActualLinkedList2Node = emptyList.find(testedValue);
+        assertNull(emptyListActualLinkedList2Node);
     }
 
     /**
@@ -388,53 +390,53 @@ public class LinkedList2Test extends TestCase {
     @Test
     public void testFindAll() {
         setUpLists();
-        ArrayList<Node> expectedArrayListWithOneResult = new ArrayList<>();
-        ArrayList<Node> expectedArrayListWithSeveralResult = new ArrayList<>();
-        expectedArrayListWithOneResult.add(new Node(testedValue));
-        expectedArrayListWithSeveralResult.add(new Node(testedValue));
-        expectedArrayListWithSeveralResult.add(new Node(testedValue));
+        ArrayList<LinkedList2Node> expectedArrayListWithOneResult = new ArrayList<>();
+        ArrayList<LinkedList2Node> expectedArrayListWithSeveralResult = new ArrayList<>();
+        expectedArrayListWithOneResult.add(new LinkedList2Node(testedValue));
+        expectedArrayListWithSeveralResult.add(new LinkedList2Node(testedValue));
+        expectedArrayListWithSeveralResult.add(new LinkedList2Node(testedValue));
 
-        ArrayList<Node> actualStartMultiply = startElemTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualStartMultiply = startElemTestInMultiplyList.findAll(testedValue);
         expectedArrayListWithOneResult.forEach(expected -> {
             assertEquals(expected.value, actualStartMultiply.get(0).value);
         });
 
-        ArrayList<Node> actualStartSeveralMultiply = startSeveralElemsTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualStartSeveralMultiply = startSeveralElemsTestInMultiplyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
             assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualStartSeveralMultiply.get(i).value);
         }
 
-        ArrayList<Node> actualMiddleMultiply = middleElemTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualMiddleMultiply = middleElemTestInMultiplyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
             assertEquals(expectedArrayListWithOneResult.get(i).value, actualMiddleMultiply.get(i).value);
         }
 
-        ArrayList<Node> actualMiddleSeveralMultiply = middleSeveralElemsTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualMiddleSeveralMultiply = middleSeveralElemsTestInMultiplyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
             assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualMiddleSeveralMultiply.get(i).value);
         }
 
-        ArrayList<Node> actualTailMultiply = tailElemTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualTailMultiply = tailElemTestInMultiplyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
             assertEquals(expectedArrayListWithOneResult.get(i).value, actualTailMultiply.get(i).value);
         }
 
-        ArrayList<Node> actualTailSeveralMultiply = tailSeveralElemsTestInMultiplyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualTailSeveralMultiply = tailSeveralElemsTestInMultiplyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithSeveralResult.size(); i++) {
             assertEquals(expectedArrayListWithSeveralResult.get(i).value, actualTailSeveralMultiply.get(i).value);
         }
 
-        ArrayList<Node> actualOneElemWithValue = oneElemListWithTestValue.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualOneElemWithValue = oneElemListWithTestValue.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
             assertEquals(expectedArrayListWithOneResult.get(i).value, actualOneElemWithValue.get(i).value);
         }
 
-        ArrayList<Node> actualOneElemWithoutValue = oneElemListWithoutTestValue.findAll(testedValue);
+        ArrayList<LinkedList2Node> actualOneElemWithoutValue = oneElemListWithoutTestValue.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
             assertEquals(new ArrayList<>(), actualOneElemWithoutValue);
         }
 
-        ArrayList<Node> emptyListValue = emptyList.findAll(testedValue);
+        ArrayList<LinkedList2Node> emptyListValue = emptyList.findAll(testedValue);
         for (int i = 0; i < expectedArrayListWithOneResult.size(); i++) {
             assertEquals(new ArrayList<>(), emptyListValue);
         }
@@ -459,7 +461,7 @@ public class LinkedList2Test extends TestCase {
     public void testInsertAfter() {
         setUpLists();
 
-        tailElemTestInMultiplyList.insertAfter(null, testedNode);
+        tailElemTestInMultiplyList.insertAfter(null, testedLinkedList2Node);
         assertEquals(testedValue, tailElemTestInMultiplyList.head.value);
         assertEquals(1, tailElemTestInMultiplyList.head.next.value);
         assertNull(tailElemTestInMultiplyList.head.prev);
@@ -469,7 +471,7 @@ public class LinkedList2Test extends TestCase {
 
         setUpLists();
 
-        tailElemTestInMultiplyList.insertAfter(new Node(1), testedNode);
+        tailElemTestInMultiplyList.insertAfter(new LinkedList2Node(1), testedLinkedList2Node);
         assertEquals(1, tailElemTestInMultiplyList.head.value);
         assertEquals(testedValue, tailElemTestInMultiplyList.head.next.value);
         assertNull(tailElemTestInMultiplyList.head.prev);
@@ -479,7 +481,7 @@ public class LinkedList2Test extends TestCase {
 
         setUpLists();
 
-        startElemTestInMultiplyList.insertAfter(new Node(4), testedNode);
+        startElemTestInMultiplyList.insertAfter(new LinkedList2Node(4), testedLinkedList2Node);
         assertEquals(testedValue, startElemTestInMultiplyList.head.value);
         assertEquals(testedValue, startElemTestInMultiplyList.tail.value);
         assertNull(startElemTestInMultiplyList.tail.next);
@@ -489,7 +491,7 @@ public class LinkedList2Test extends TestCase {
 
         setUpLists();
 
-        oneElemListWithoutTestValue.insertAfter(new Node(1), testedNode);
+        oneElemListWithoutTestValue.insertAfter(new LinkedList2Node(1), testedLinkedList2Node);
         assertEquals(1, oneElemListWithoutTestValue.head.value);
         assertEquals(testedValue, oneElemListWithoutTestValue.head.next.value);
         assertNull(oneElemListWithoutTestValue.tail.next);
@@ -500,7 +502,7 @@ public class LinkedList2Test extends TestCase {
 
         setUpLists();
 
-        emptyList.insertAfter(null, testedNode);
+        emptyList.insertAfter(null, testedLinkedList2Node);
         assertEquals(testedValue, emptyList.head.value);
         assertEquals(testedValue, emptyList.tail.value);
         assertNull(emptyList.tail.next);

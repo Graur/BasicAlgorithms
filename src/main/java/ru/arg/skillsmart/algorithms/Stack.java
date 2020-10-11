@@ -1,3 +1,5 @@
+package ru.arg.skillsmart.algorithms;
+
 import java.util.*;
 
 public class Stack<T>
