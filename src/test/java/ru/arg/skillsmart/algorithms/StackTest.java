@@ -1,3 +1,5 @@
+package ru.arg.skillsmart.algorithms;
+
 import ru.arg.skillsmart.algorithms.Stack;
 import junit.framework.TestCase;
 import org.junit.Test;
