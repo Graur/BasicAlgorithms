@@ -23,13 +23,13 @@ public class Stack<T>
             return null;  // если стек пустой
         } else {
             size--;
-            return (T) data.pop();
+            return (T) data.pollFirst();
         }
     }
 
     public void push(T val)
     {
-        data.push(val);
+        data.addFirst(val);
         size++;
     }
 
@@ -38,7 +38,7 @@ public class Stack<T>
         if (size == 0) {
             return null; // если стек пустой
         } else {
-            return (T) data.peek();
+            return (T) data.peekFirst();
         }
     }
 }
