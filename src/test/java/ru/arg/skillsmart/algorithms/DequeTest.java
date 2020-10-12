@@ -62,6 +62,8 @@ public class DequeTest extends TestCase {
         deque.removeFront();
         assertNull(deque.head);
         assertNull(deque.tail);
+        Integer integer1 = deque.removeFront();
+        assertNull(integer1);
     }
 
     @Test
@@ -81,6 +83,8 @@ public class DequeTest extends TestCase {
         deque.removeTail();
         assertNull(deque.head);
         assertNull(deque.tail);
+        Integer integer1 = deque.removeTail();
+        assertNull(integer1);
     }
 
     @Test

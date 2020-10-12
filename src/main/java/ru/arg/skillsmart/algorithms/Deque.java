@@ -45,6 +45,9 @@ public class Deque<T>
     public T removeFront()
     {
         // удаление из головы
+        if (this.head == null) {
+            return null;
+        }
         Node<T> deletedEl = this.head;
         Node<T> newHead = this.head.next;
         this.head = newHead;
@@ -60,6 +63,9 @@ public class Deque<T>
     public T removeTail()
     {
         // удаление из хвоста
+        if (this.tail == null) {
+            return null;
+        }
         Node<T> deletedEl = this.tail;
         Node<T> newTail = this.tail.prev;
         this.tail = newTail;
