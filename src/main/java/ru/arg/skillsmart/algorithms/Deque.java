@@ -82,40 +82,41 @@ public class Deque<T>
     {
         return size;
     }
+    class Node<T>
+    {
+        public T value;
+        public Node<T> next;
+        public Node<T> prev;
+
+        public Node(T _value)
+        {
+            this.value = _value;
+            this.next = null;
+            this.prev = null;
+        }
+
+        public Node(Node<T> prev, T _value, Node<T> next)
+        {
+            this.value = _value;
+            this.next = next;
+            this.prev = prev;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node<?> node = (Node<?>) o;
+            return Objects.equals(value, node.value) &&
+                    Objects.equals(next, node.next) &&
+                    Objects.equals(prev, node.prev);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(value, next, prev);
+        }
+    }
+
 }
 
-class Node<T>
-{
-    public T value;
-    public Node<T> next;
-    public Node<T> prev;
-
-    public Node(T _value)
-    {
-        this.value = _value;
-        this.next = null;
-        this.prev = null;
-    }
-
-    public Node(Node<T> prev, T _value, Node<T> next)
-    {
-        this.value = _value;
-        this.next = next;
-        this.prev = prev;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Node<?> node = (Node<?>) o;
-        return Objects.equals(value, node.value) &&
-                Objects.equals(next, node.next) &&
-                Objects.equals(prev, node.prev);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, next, prev);
-    }
-}
