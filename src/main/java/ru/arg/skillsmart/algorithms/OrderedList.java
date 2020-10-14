@@ -28,10 +28,17 @@ public class OrderedList<T>
 
     public int compare(T v1, T v2)
     {
-        return 0;
         // -1 если v1 < v2
         // 0 если v1 == v2
         // +1 если v1 > v2
+        int intValueOfV1 = (int) v1;
+        int intValueOfV2 = (int) v2;
+        if (intValueOfV1 < intValueOfV2) {
+            return -1;
+        } else if (intValueOfV1 > intValueOfV2) {
+            return 1;
+        }
+        return 0;
     }
 
     public void add(T value)
