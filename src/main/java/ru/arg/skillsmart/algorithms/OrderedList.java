@@ -24,6 +24,7 @@ public class OrderedList<T>
     {
         head = null;
         tail = null;
+        size = 0;
         _ascending = asc;
     }
 
@@ -58,16 +59,16 @@ public class OrderedList<T>
 
     public void add(T value)
     {
-        Node<T> node = this.head;
-        Node<T> prevNode = this.head.prev;
-
-        while (node.next != null) {
-            if(compare(node.value, value) < 0) {
-                insertAfter(prevNode, new Node<>(value));
-                size++;
-            } else {
-                prevNode = node;
-                node = node.next;
+        if (head == null) {
+            insertAfter(null, new Node<>(value));
+        } else {
+            Node<T> node = this.head;
+            while (node.next != null) {
+                if (compare(node.value, value) < 0) {
+                    insertAfter(node, new Node<>(value));
+                } else {
+                    node = node.next;
+                }
             }
         }
         // автоматическая вставка value
