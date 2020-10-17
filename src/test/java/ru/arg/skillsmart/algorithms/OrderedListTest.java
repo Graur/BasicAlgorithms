@@ -216,7 +216,7 @@ public class OrderedListTest extends TestCase {
     }
 
     @Test
-    public void testArray() {
+    public void testAscArray() {
         ascOrderedListInt = new OrderedList<>(true);
         ascOrderedListInt.add(0);
         ascOrderedListInt.add(2);
@@ -227,4 +227,18 @@ public class OrderedListTest extends TestCase {
         ascOrderedListInt.add(0);
         ascOrderedListInt.getAll().forEach(s -> System.out.println(s.value));
     }
+
+    @Test
+    public void testDescArray() {
+        ascOrderedListInt = new OrderedList<>(false);
+        ascOrderedListInt.add(0);
+        ascOrderedListInt.add(2);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(2);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(0);
+        ascOrderedListInt.getAll().forEach(s -> System.out.println(s.value));
+    }
+
 }

@@ -67,13 +67,17 @@ public class OrderedList<T>
             while (node != null) {
                 if (compare(node.value, value) <= 0) {
                     Node<T> comparingNode = _ascending ? node.next : node.prev;
-                    if (comparingNode != null && compare(comparingNode.value, value) > 0) {
+                    if (comparingNode == null) {
+                        Node<T> afterNode = _ascending ? tail : null;
+                        insertAfter(afterNode, newNode);
+                        break;
+                    } else if (compare(comparingNode.value, value) > 0) {
                         Node<T> insertingAfterNode = _ascending ? node : comparingNode;
                         insertAfter(insertingAfterNode, newNode);
                         break;
-                    } else if (comparingNode == null) {
-                        Node<T> afterNode = _ascending ? tail : null;
-                        insertAfter(afterNode, newNode);
+                    } else if (compare(comparingNode.value, value) == 0) {
+                        Node<T> insertingAfterNode = _ascending ? node.next : comparingNode;
+                        insertAfter(insertingAfterNode, newNode);
                         break;
                     }
                 } else {
@@ -117,11 +121,11 @@ public class OrderedList<T>
 
     public Node<T> find(T val)
     {
-        Node<T> node = this.head;
+        Node<T> node = _ascending ? this.head : this.tail;
         while (node != null) {
             if (node.value == val)
                 return node;
-            node = node.next;
+            node = _ascending ? node.next : node.prev;
         }
         return null;
     }
