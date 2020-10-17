@@ -65,7 +65,7 @@ public class OrderedList<T>
         } else {
             Node<T> node = _ascending ? this.head : this.tail;
             while (node != null) {
-                if (compare(node.value, value) < 0) {
+                if (compare(node.value, value) <= 0) {
                     Node<T> comparingNode = _ascending ? node.next : node.prev;
                     if (comparingNode != null && compare(comparingNode.value, value) > 0) {
                         Node<T> insertingAfterNode = _ascending ? node : comparingNode;

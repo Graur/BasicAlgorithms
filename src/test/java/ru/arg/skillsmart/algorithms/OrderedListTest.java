@@ -214,4 +214,17 @@ public class OrderedListTest extends TestCase {
         setUp();
         assertEquals(6, ascOrderedListInt.count());
     }
+
+    @Test
+    public void testArray() {
+        ascOrderedListInt = new OrderedList<>(true);
+        ascOrderedListInt.add(0);
+        ascOrderedListInt.add(2);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(2);
+        ascOrderedListInt.add(1);
+        ascOrderedListInt.add(0);
+        ascOrderedListInt.getAll().forEach(s -> System.out.println(s.value));
+    }
 }
