@@ -172,10 +172,25 @@ public class OrderedListTest extends TestCase {
         assertEquals(6, descOrderedListInt.count());
     }
 
+    @Test
     public void testFind() {
+        setUp();
+        assertEquals(Integer.valueOf(0), ascOrderedListInt.find(0).value);
+        assertEquals(Integer.valueOf(20), ascOrderedListInt.find(20).value);
+        assertEquals(Integer.valueOf(3), ascOrderedListInt.find(3).value);
     }
 
+    @Test
     public void testDelete() {
+        setUp();
+        ascOrderedListInt.delete(0);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.head.value);
+        assertEquals(5, ascOrderedListInt.count());
+        ascOrderedListInt.delete(3);
+        assertEquals(4, ascOrderedListInt.count());
+        ascOrderedListInt.delete(20);
+        assertEquals(3, ascOrderedListInt.count());
+        assertEquals(Integer.valueOf(10), ascOrderedListInt.tail.value);
     }
 
     @Test
