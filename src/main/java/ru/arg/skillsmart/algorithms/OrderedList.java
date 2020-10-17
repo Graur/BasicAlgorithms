@@ -59,15 +59,24 @@ public class OrderedList<T>
 
     public void add(T value)
     {
+        Node<T> newNode = new Node<>(value);
         if (head == null) {
-            insertAfter(null, new Node<>(value));
+            insertAfter(null, newNode);
         } else {
             Node<T> node = this.head;
-            while (node.next != null) {
+            while (node != null) {
                 if (compare(node.value, value) < 0) {
-                    insertAfter(node, new Node<>(value));
-                } else {
+                    if (node.next != null && compare(node.next.value, value) > 0) {
+                        insertAfter(node, newNode);
+                        break;
+                    } else if (node.next == null) {
+                        insertAfter(tail, newNode);
+                        break;
+                    }
                     node = node.next;
+                } else {
+                    insertAfter(null, newNode);
+                    break;
                 }
             }
         }

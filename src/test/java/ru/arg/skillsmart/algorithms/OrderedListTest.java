@@ -59,7 +59,7 @@ public class OrderedListTest extends TestCase {
     }
 
     @Test
-    public void testAdd() {
+    public void testAddInt() {
         ascOrderedListInt = new OrderedList<>(true);
         assertNull(ascOrderedListInt.head);
         assertNull(ascOrderedListInt.tail);
@@ -80,6 +80,34 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
         assertEquals(2, ascOrderedListInt.size);
+        ascOrderedListInt.add(5);
+        assertEquals(null, ascOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(0), ascOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(5), ascOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
+        assertEquals(null, ascOrderedListInt.tail.next);
+        assertEquals(3, ascOrderedListInt.size);
+        ascOrderedListInt.add(-1);
+        assertEquals(null, ascOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(-1), ascOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(0), ascOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
+        assertEquals(null, ascOrderedListInt.tail.next);
+        assertEquals(4, ascOrderedListInt.size);
+        ascOrderedListInt.add(2);
+        assertEquals(null, ascOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(-1), ascOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(0), ascOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(1), ascOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(2), ascOrderedListInt.head.next.next.next.value);
+        assertEquals(Integer.valueOf(2), ascOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
+        assertEquals(null, ascOrderedListInt.tail.next);
+        assertEquals(5, ascOrderedListInt.size);
     }
 
     public void testFind() {
