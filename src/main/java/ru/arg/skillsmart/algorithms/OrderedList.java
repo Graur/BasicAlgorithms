@@ -63,21 +63,25 @@ public class OrderedList<T>
         if (head == null) {
             insertAfter(null, newNode);
         } else {
-            Node<T> node = this.head;
+            Node<T> node = _ascending ? this.head : this.tail;
             while (node != null) {
                 if (compare(node.value, value) < 0) {
-                    if (node.next != null && compare(node.next.value, value) > 0) {
-                        insertAfter(node, newNode);
+                    Node<T> comparingNode = _ascending ? node.next : node.prev;
+                    if (comparingNode != null && compare(comparingNode.value, value) > 0) {
+                        Node<T> insertingAfterNode = _ascending ? node : comparingNode;
+                        insertAfter(insertingAfterNode, newNode);
                         break;
-                    } else if (node.next == null) {
-                        insertAfter(tail, newNode);
+                    } else if (comparingNode == null) {
+                        Node<T> afterNode = _ascending ? tail : null;
+                        insertAfter(afterNode, newNode);
                         break;
                     }
-                    node = node.next;
                 } else {
-                    insertAfter(null, newNode);
+                    Node<T> afterNode = _ascending ? null : tail;
+                    insertAfter(afterNode, newNode);
                     break;
                 }
+                node = _ascending ? node.next : node.prev;
             }
         }
         // автоматическая вставка value

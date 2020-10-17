@@ -59,11 +59,11 @@ public class OrderedListTest extends TestCase {
     }
 
     @Test
-    public void testAddInt() {
+    public void testAddAsc() {
         ascOrderedListInt = new OrderedList<>(true);
         assertNull(ascOrderedListInt.head);
         assertNull(ascOrderedListInt.tail);
-        assertEquals(0, ascOrderedListInt.size);
+        assertEquals(0, ascOrderedListInt.count());
         ascOrderedListInt.add(0);
         assertEquals(null, ascOrderedListInt.head.prev);
         assertEquals(Integer.valueOf(0), ascOrderedListInt.head.value);
@@ -71,7 +71,7 @@ public class OrderedListTest extends TestCase {
         assertEquals(null, ascOrderedListInt.tail.prev);
         assertEquals(Integer.valueOf(0), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
-        assertEquals(1, ascOrderedListInt.size);
+        assertEquals(1, ascOrderedListInt.count());
         ascOrderedListInt.add(1);
         assertEquals(null, ascOrderedListInt.head.prev);
         assertEquals(Integer.valueOf(0), ascOrderedListInt.head.value);
@@ -79,7 +79,7 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(0), ascOrderedListInt.tail.prev.value);
         assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
-        assertEquals(2, ascOrderedListInt.size);
+        assertEquals(2, ascOrderedListInt.count());
         ascOrderedListInt.add(5);
         assertEquals(null, ascOrderedListInt.head.prev);
         assertEquals(Integer.valueOf(0), ascOrderedListInt.head.value);
@@ -88,7 +88,7 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.prev.value);
         assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
-        assertEquals(3, ascOrderedListInt.size);
+        assertEquals(3, ascOrderedListInt.count());
         ascOrderedListInt.add(-1);
         assertEquals(null, ascOrderedListInt.head.prev);
         assertEquals(Integer.valueOf(-1), ascOrderedListInt.head.value);
@@ -97,7 +97,7 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(1), ascOrderedListInt.tail.prev.value);
         assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
-        assertEquals(4, ascOrderedListInt.size);
+        assertEquals(4, ascOrderedListInt.count());
         ascOrderedListInt.add(2);
         assertEquals(null, ascOrderedListInt.head.prev);
         assertEquals(Integer.valueOf(-1), ascOrderedListInt.head.value);
@@ -107,7 +107,69 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(2), ascOrderedListInt.tail.prev.value);
         assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
-        assertEquals(5, ascOrderedListInt.size);
+        assertEquals(5, ascOrderedListInt.count());
+    }
+
+    @Test
+    public void testAddDesc() {
+        descOrderedListInt = new OrderedList<>(false);
+        assertNull(descOrderedListInt.head);
+        assertNull(descOrderedListInt.tail);
+        assertEquals(0, descOrderedListInt.count());
+        descOrderedListInt.add(0);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.head.value);
+        assertEquals(null, descOrderedListInt.head.next);
+        assertEquals(null, descOrderedListInt.tail.prev);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(1, descOrderedListInt.count());
+        descOrderedListInt.add(1);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(2, descOrderedListInt.count());
+        descOrderedListInt.add(5);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(5), descOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(3, descOrderedListInt.count());
+        descOrderedListInt.add(-1);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(5), descOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(-1), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(4, descOrderedListInt.count());
+        descOrderedListInt.add(2);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(5), descOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(2), descOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.head.next.next.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(-1), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(5, descOrderedListInt.count());
+        descOrderedListInt.add(10);
+        assertEquals(null, descOrderedListInt.head.prev);
+        assertEquals(Integer.valueOf(10), descOrderedListInt.head.value);
+        assertEquals(Integer.valueOf(5), descOrderedListInt.head.next.value);
+        assertEquals(Integer.valueOf(2), descOrderedListInt.head.next.next.value);
+        assertEquals(Integer.valueOf(1), descOrderedListInt.head.next.next.next.value);
+        assertEquals(Integer.valueOf(0), descOrderedListInt.tail.prev.value);
+        assertEquals(Integer.valueOf(-1), descOrderedListInt.tail.value);
+        assertEquals(null, descOrderedListInt.tail.next);
+        assertEquals(6, descOrderedListInt.count());
     }
 
     public void testFind() {
@@ -116,9 +178,18 @@ public class OrderedListTest extends TestCase {
     public void testDelete() {
     }
 
+    @Test
     public void testClear() {
+        setUp();
+        ascOrderedListInt.clear(true);
+        assertNull(ascOrderedListInt.head);
+        assertNull(ascOrderedListInt.tail);
+        assertEquals(0, ascOrderedListInt.count());
     }
 
+    @Test
     public void testCount() {
+        setUp();
+        assertEquals(6, ascOrderedListInt.count());
     }
 }
