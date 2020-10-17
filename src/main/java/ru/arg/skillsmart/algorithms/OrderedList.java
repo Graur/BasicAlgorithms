@@ -18,7 +18,7 @@ public class OrderedList<T>
 {
     public Node<T> head, tail;
     private boolean _ascending;
-    public int size;
+    private int size;
 
     public OrderedList(boolean asc)
     {
@@ -43,8 +43,8 @@ public class OrderedList<T>
             }
             return 0;
         } else if (v1 instanceof String && v2 instanceof String) {
-            String stringValueOfV1 = (String) v1;
-            String stringValueOfV2 = (String) v2;
+            String stringValueOfV1 = ((String) v1).trim();
+            String stringValueOfV2 = ((String) v2).trim();
 
             int i = stringValueOfV1.compareTo(stringValueOfV2);
             if (i > 0) {
@@ -84,8 +84,6 @@ public class OrderedList<T>
                 node = _ascending ? node.next : node.prev;
             }
         }
-        // автоматическая вставка value
-        // в нужную позицию
     }
 
     public void insertAfter(Node<T> nodeAfter, Node<T> nodeToInsert)

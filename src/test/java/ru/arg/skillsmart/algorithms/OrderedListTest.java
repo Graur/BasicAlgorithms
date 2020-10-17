@@ -33,8 +33,8 @@ public class OrderedListTest extends TestCase {
         ascOrderedListStr = new OrderedList<>(true);
         ascOrderedListStr.add("a");
         ascOrderedListStr.add("b");
-        ascOrderedListStr.add("c");
-        ascOrderedListStr.add("d");
+        ascOrderedListStr.add("e");
+        ascOrderedListStr.add("f");
         ascOrderedListStr.add("x");
         ascOrderedListStr.add("z");
 
@@ -108,6 +108,13 @@ public class OrderedListTest extends TestCase {
         assertEquals(Integer.valueOf(5), ascOrderedListInt.tail.value);
         assertEquals(null, ascOrderedListInt.tail.next);
         assertEquals(5, ascOrderedListInt.count());
+    }
+
+    @Test
+    public void testStrAsc() {
+        setUp();
+        ascOrderedListStr.add(" c ");
+        ascOrderedListStr.getAll().forEach(s -> System.out.println(s.value));
     }
 
     @Test
