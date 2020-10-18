@@ -91,4 +91,14 @@ public class HashTableTest {
         assertEquals(collisionTable.slots[collusionIndex2], "1");
         assertEquals(-1, collisionTable.find("ffffff"));
     }
+
+    @Test
+    public void testFind2() {
+        HashTable ht = new HashTable(13, 3);
+        int ab = ht.put("ab");
+        int ba = ht.put("ba");
+        ht.find("ba");
+        assertEquals(ba, ht.find("ba"));
+        assertEquals(ab, ht.find("ab"));
+    }
 }

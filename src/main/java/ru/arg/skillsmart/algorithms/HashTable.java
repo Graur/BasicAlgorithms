@@ -73,7 +73,17 @@ public class HashTable
         if (slots[index].equals(value)) {
             return index;
         } else {
-            return -1;
+            int count = 0;
+            int newIndex = index + step >= size ? step - (size - index) : index + step;
+            while (count != size) {
+                if (slots[newIndex] != null && slots[newIndex].equals(value))  {
+                    return newIndex;
+                } else {
+                    newIndex = newIndex + step >= size ? step - (size - newIndex) : newIndex + step;
+                    count++;
+                }
+            }
         }
+        return -1;
     }
 }
