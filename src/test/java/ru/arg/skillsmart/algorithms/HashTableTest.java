@@ -1,12 +1,8 @@
 package ru.arg.skillsmart.algorithms;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import java.util.Arrays;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -44,32 +40,15 @@ public class HashTableTest {
     @Test
     public void hashFun() {
         simpleTable = new HashTable(17, 3);
-        System.out.println(simpleTable.hashFun("98"));
+        int i = simpleTable.hashFun("98");
+        assertTrue(i>=0 && i < simpleTable.size);
     }
 
     @Test
     public void seekSlot() {
         setUp();
-        assertEquals(13, simpleTable.size);
-        assertEquals(-1, simpleTable.put("zzz"));
-        System.out.println("SIMPLE TABLE");
-        for (String s : simpleTable.slots) {
-            System.out.println(s);
-        }
-
-        System.out.println("COLLISION TABLE");
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertNotEquals(-1, collisionTable.put("1"));
-        assertEquals(-1, collisionTable.put("1"));
-
-        System.out.println("============================");
-        for (String s : collisionTable.slots) {
-            System.out.println(s);
-        }
+        assertEquals(-1 ,collisionTable.put(null));
+        assertEquals(-1 ,collisionTable.find(null));
     }
 
     @Test

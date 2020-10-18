@@ -27,6 +27,9 @@ public class HashTable
 
     public int seekSlot(String value)
     {
+        if (value == null) {
+            return -1;
+        }
         // находит индекс пустого слота для значения, или -1
         int index = hashFun(value);
         if (slots[index] == null) {
@@ -48,6 +51,9 @@ public class HashTable
 
     public int put(String value)
     {
+        if (value == null) {
+            return -1;
+        }
         // записываем значение по хэш-функции
         int index = seekSlot(value);
         // возвращается индекс слота или -1
@@ -60,6 +66,9 @@ public class HashTable
 
     public int find(String value)
     {
+        if (value == null) {
+            return -1;
+        }
         int index = hashFun(value);
         if (slots[index].equals(value)) {
             return index;
