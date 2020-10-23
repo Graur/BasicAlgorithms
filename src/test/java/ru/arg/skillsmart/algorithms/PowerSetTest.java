@@ -177,8 +177,8 @@ public class PowerSetTest {
         long end = System.currentTimeMillis();
         assertEquals(33000, res.size());
         long time = end - start;
-        assertTrue(time <= 2000);
         System.out.println("Benchmarks time = " + time);
+        assertTrue(time <= 2000);
     }
 
     @Test
@@ -249,5 +249,226 @@ public class PowerSetTest {
         long time = end - start;
         assertTrue(time <= 2000);
         System.out.println("Benchmarks time = " + time);
+    }
+
+    @Test
+    public void sizeZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdvf");
+        ps.put("sdfsf");
+        ps.put("sd");
+        assertEquals(4, ps.size());
+    }
+
+    @Test
+    public void putZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdg");
+        ps.put("sd");
+        ps.put("sd");
+        ps.put("sdf");
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
+        assertEquals(7, ps.size());
+    }
+
+    @Test
+    public void getZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdg");
+        ps.put("sd");
+        ps.put("sd");
+        ps.put("sdf");
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
+        assertTrue(ps.get("sd"));
+        assertFalse(ps.get("sdq"));
+    }
+
+    @Test
+    public void removeZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdg");
+        ps.put("sd");
+        ps.put("sd2");
+        ps.put("sdf2");
+        ps.put("s");
+        ps.put("ss");
+        ps.put("sss");
+        ps.put("ssss");
+
+        ps.remove("s");
+        ps.remove("sd");
+        assertEquals(7, ps.size());
+        assertFalse(ps.remove("aaa"));
+        assertTrue(ps.get("sdg"));
+        assertTrue(ps.get("sdf2"));
+        assertTrue(ps.get("ss"));
+        assertTrue(ps.get("sdf"));
+        assertTrue(ps.get("ssss"));
+        assertTrue(ps.get("sss"));
+        assertTrue(ps.get("sd2"));
+        assertTrue(ps.remove("sss"));
+    }
+
+    @Test
+    public void removeZ2() {
+        PowerSet ps = new PowerSet();
+        ps.put("abc");
+        ps.put("bac");
+        ps.put("bca");
+
+        assertEquals(3, ps.size());
+        assertTrue(ps.remove("bac"));
+        assertFalse(ps.remove("sss"));
+        assertEquals(2, ps.size());
+    }
+
+    @Test
+    public void intersectionZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("aaa");
+        ps2.put("sdv");
+        ps2.put("hg");
+        ps2.put("sd");
+        assertEquals(2, ps.intersection(ps2).size());
+    }
+
+    @Test
+    public void intersectionEmpty() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("aaa");
+        ps2.put("sdv1");
+        ps2.put("hg");
+        ps2.put("sd11");
+        assertEquals(0, ps.intersection(ps2).size());
+    }
+
+    @Test
+    public void unionZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        ps.put("hg");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("aaa");
+        ps2.put("sdv1");
+        ps2.put("hg");
+        for (String s : ps.union(ps2).slots) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    public void unionEmpty() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        assertEquals(4, ps.union(ps2).size());
+    }
+
+    @Test
+    public void differenceZ() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("aaa");
+        ps2.put("sdv1");
+        ps2.put("sd");
+        assertEquals(3, ps.difference(ps2).size());
+        /*for (String s : ps.difference(ps2).slots) {
+            System.out.println(s);
+        }*/
+    }
+
+    @Test
+    public void differenceEmpty() {
+        PowerSet ps = new PowerSet();
+        ps.put("111");
+        ps.put("222");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("111");
+        ps2.put("222");
+        assertEquals(0, ps.difference(ps2).size());
+    }
+
+    @Test
+    public void isSubsetFalse() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("aaa");
+        ps2.put("sdv1");
+        ps2.put("sd");
+        assertFalse(ps.isSubset(ps2));
+    }
+
+    @Test
+    public void isSubset1() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        ps.put("sd");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("sdv");
+        ps2.put("sdf");
+        assertTrue(ps.isSubset(ps2));
+    }
+
+    @Test
+    public void isSubset2Z() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("sdv");
+        ps2.put("sdf");
+        ps2.put("sdfsf");
+        assertTrue(ps.isSubset(ps2));
+    }
+
+    @Test
+    public void isSubset3Z() {
+        PowerSet ps = new PowerSet();
+        ps.put("sdf");
+        ps.put("sdv");
+        ps.put("sdfsf");
+        PowerSet ps2 = new PowerSet();
+        ps2.put("sdv");
+        ps2.put("sdf");
+        ps2.put("sdfsf");
+        ps2.put("aaa");
+        assertFalse(ps.isSubset(ps2));
     }
 }

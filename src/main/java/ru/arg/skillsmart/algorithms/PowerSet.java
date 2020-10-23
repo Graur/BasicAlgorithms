@@ -129,14 +129,19 @@ public class PowerSet
     {
         // возвращает true если value удалено
         // иначе false
-        if (!get(value)) {
-            return false;
-        }
-        int index = find(value);
-        if (index != -1 && slots[index] != null) {
-            slots[index] = null;
-            count--;
-            return true;
+        if (get(value)) {
+            int slot = hashFun(value);
+            for (int i = 0; i < size; i++) {
+                if (slots[slot] != null && slots[slot].equals(value)) {
+                    slots[slot] = null;
+                    count--;
+                    return true;
+                }
+                slot = slot + step;
+                if (slot >= size) {
+                    slot = slot - size;
+                }
+            }
         }
         return false;
     }
